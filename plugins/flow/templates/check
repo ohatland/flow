@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Gate for the flow (see shared/profile.md in the flow plugin, "Gate"). Run from the repo root.
+# Usage: .flow/check <base-commit> [--all-tests] [--no-tests]
+# Prints one section per check, then a SUMMARY block. Exit 1 if any check FAILs, 2 on usage errors.
+set -uo pipefail
+
+base="${1:-}"
+[[ -z "$base" ]] && { echo "usage: .flow/check <base-commit> [--all-tests] [--no-tests]" >&2; exit 2; }
+shift
+all_tests=0; no_tests=0
+for a in "$@"; do
+  case "$a" in
+    --all-tests) all_tests=1 ;;
+    --no-tests) no_tests=1 ;;
+    *) echo "unknown option: $a" >&2; exit 2 ;;
+  esac
+done
+git rev-parse --verify -q "$base^{commit}" >/dev/null || { echo "unknown base commit: $base" >&2; exit 2; }
+
+summary=()
+failed=0
+record() { summary+=("$1  $2"); if [[ "$1" == FAIL ]]; then failed=1; fi; }
+section() { printf '\n===== %s =====\n' "$1"; }
+# run <name> <command...>: runs a check, records PASS or FAIL from its exit code.
+run() { local name=$1; shift; section "$name"; if "$@"; then record PASS "$name"; else record FAIL "$name"; fi; }
+
+mapfile -t changed < <( { git diff --name-only "$base"; git ls-files --others --exclude-standard; } | sort -u )
+section "Changed files (${#changed[@]})"
+printf '%s\n' "${changed[@]}"
+((${#changed[@]})) || record FLAG "no changed files against $(git rev-parse --short "$base"): check the base commit"
+
+# --- checks for this repo ---------------------------------------------------------------
+# run "build" <build command>
+# run "lint" <lint command on the changed files>
+# ((no_tests)) || run "tests" <test command>   # all tests with --all-tests, a subset otherwise
+
+section SUMMARY
+printf '%s\n' "${summary[@]}"
+exit "$failed"

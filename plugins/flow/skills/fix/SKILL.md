@@ -1,0 +1,35 @@
+---
+name: fix
+description: Fix a bug outside a goal with a lighter flow loop - reproduce with a red you can check, minimise, hypothesise, fix the cause with a regression test, the gate and one review. For broken intended behavior, not new behavior.
+argument-hint: "<bug description>"
+disable-model-invocation: true
+---
+
+Fix: $ARGUMENTS
+
+A fix restores intended behavior. New behavior, or a change in a contract category beyond
+restoring the intended behavior, is a contract change: propose a goal or step instead.
+
+Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` for dispatch, questions and commits
+(read it, `state.md` and `.flow/project.md` if you have not). The record is a fix file
+instead of a step file.
+
+1. **Place.** Work where the profile's `## Git` allows. If that needs a new branch or
+   worktree, propose a name and base and create it after an explicit yes.
+2. **Record.** Write `<state>/goals/fixes/<YYYY-MM-DD>-<slug>.md` from the template in
+   `state.md`: Base commit (current `HEAD`), `## Problem` (what happens, with the
+   reproduction the user gave), `## Expected` (what should happen and where that is
+   decided). Confirm Expected with the user if it is not written down.
+3. **Fix.** Dispatch `flow:developer` with the fix file, the gate command line and the
+   shared folder path. It follows its "Bug fixes" section: a red loop with a recorded
+   command and output, minimised, 3-5 ranked hypotheses, then the fix with the regression
+   test red before and green after. "No correct seam for a test" is a finding: put it to the
+   user.
+4. **Gate.** Run the gate, output to a file. Failures go back to the developer (same
+   agent).
+5. **Review.** One `flow:reviewer`, axis `fix`. Blockers and majors go back to the
+   developer once; after that, the user decides.
+6. **Close.** Record the review and a trace line per agent, write your own hotwash under
+   the fix file's top-level `## Hotwash` (the developer's stays in its `### Hotwash`),
+   commit, report. If the hotwashes or traces show workflow friction, add a line to
+   `<state>/goals/process-log.md`.

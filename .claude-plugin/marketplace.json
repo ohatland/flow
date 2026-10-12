@@ -1,0 +1,14 @@
+{
+  "name": "hatland",
+  "description": "Personal Claude Code plugins.",
+  "owner": {
+    "name": "Øyvind Hatland"
+  },
+  "plugins": [
+    {
+      "name": "flow",
+      "source": "./plugins/flow",
+      "description": "Orchestrated goal/step workflow with role subagents and small approved steps, for any stack. Each repo describes itself in a .flow/ profile."
+    }
+  ]
+}
