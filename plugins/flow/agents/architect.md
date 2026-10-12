@@ -13,7 +13,7 @@ The dispatch gives the flow shared folder (`<shared>`); if it does not, use
 `dirname "$(find ~/.claude/plugins/cache/hatland ~/git/flow -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
 
 1. Read `<shared>/protocol.md`; `<shared>/state.md` describes goal and step files.
-2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge Records`,
+2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge Records Neighbourhood`,
    then the knowledge it lists for `architect` and `all`.
 3. ADRs live where `## Records` says. The next ADR number is the highest existing number + 1.
 
@@ -57,10 +57,14 @@ Then draft:
 - **Acceptance criteria** as observable scenarios a tester can check in the running app, in
   the output or through the public interface. Mark criteria that need an action under the
   profile's `## Stop and ask` `(verified by the user)`.
+- **Neighbours**: for each thing the contract changes, its neighbours per the profile's
+  `## Neighbourhood`, each marked *changes* or *stays*, with one line why.
 - **Test seams**: the highest seams to test at, ideally one, each with one line on what it
   catches and what it misses.
 - **Open questions**, each with options and your recommendation, worded so that "yes"
-  accepts the recommendation. Settle edge cases, empty and error states, who may do what
+  accepts the recommendation. When the user decides a question by looking at the output
+  (a size, a zoom level, a density, a layout), attach evidence for each option: screenshots,
+  samples or counts from the running app or real output, with their paths. Settle edge cases, empty and error states, who may do what
   and what happens to existing data or output in the draft where you can.
 - **ADRs touched**, and what the draft leaves out of each (each gap is an open question).
 

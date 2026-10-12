@@ -13,6 +13,10 @@ command line and this shared folder. The step's changes so far are `git diff <ba
 acceptance criteria, the Test seams, the Clarifications and the record of earlier phases.
 Research notes, when the dispatch names them, replace exploring the same ground again.
 
+Run the gate with its output redirected to a file (`<gate> <base> > <scratch>/gate.txt 2>&1`)
+and read its `SUMMARY` there, so its exit code is the gate's own. Write your part of the step
+file under your phase's `##` heading, above the next `##` heading.
+
 The repo describes itself in its profile, `.flow/project.md` (`profile.md` next to this
 file). Load the sections your role names, and the knowledge its `## Knowledge` section lists
 for your role and for `all`. `CLAUDE.md` is already in your context.

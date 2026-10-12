@@ -99,7 +99,9 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
   including the agent's recommendation. Do not soften or filter a question the agent
   considered important. For `BLOCKED`, tell the user exactly what to do.
 - Record each question and answer in the step's `## Clarifications`. An approved contract
-  change also goes into `## Contract`, with the date.
+  change is written into `## Contract` and the acceptance criteria as the new current text,
+  with one dated line per change in a short history under the contract; the criteria always
+  read as the contract in force.
 - Resume the **same** agent with `SendMessage` (its agent ID from the launch result). Repeat
   until it returns its result. After `/clear` agents cannot be resumed; restart the phase
   with a fresh agent from the step file.
@@ -130,6 +132,12 @@ branch the profile protects.
   `/flow:next-step` and `/flow:close-goal` stay user-invoked.
 - If the agent fails or gives up, report that plainly with its reason. Never finish the
   phase's work yourself.
+
+## Pointing the user at output
+
+When the user should look at a file, screenshot or page, give each as a full URL on its own
+line (`file:///<absolute path>`, `http://localhost:<port>/...`), with one line on what to
+look for. Markdown link text alone does not open from every terminal.
 
 ## Running the app
 

@@ -31,7 +31,8 @@ enough for one developer session. It says *what*, never *how*.
    answers in its message.
 5. **Approve the contract.** Present the proposal compactly and put the open questions to
    the user in the grilling format. The contract covers exactly the profile's contract
-   categories. Do not ask about internal code structure. Get explicit approval of the
+   categories. Do not ask about internal code structure. Questions the user decides by
+   looking at the output come with the architect's evidence per option. Get explicit approval of the
    contract and of the acceptance criteria. Show the proposed test seams in one line each;
    they are accepted unless the user objects. If the step looks bigger than one session,
    propose a split (a prefactor step first, or expand / migrate / contract for a wide

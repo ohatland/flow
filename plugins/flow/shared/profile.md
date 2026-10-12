@@ -77,7 +77,9 @@ are the only check.
 ### `## Review axes`
 
 Axes beyond `spec` and `slop`, which every review has. One `###` per axis: what it checks
-and its standards sources. For example `security`, `accessibility`, `cartography`.
+and its standards sources. For example `security`, `accessibility`, `cartography`. An axis
+may end with `Applies when:` and the paths whose change calls for it; without that line it
+runs in every review.
 
 ### `## Neighbourhood`
 

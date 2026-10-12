@@ -18,7 +18,9 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
    service not reachable) is `BLOCKED`: tell the user what to do and rerun the gate. Record
    gate failures as the round's findings and go to step 6.
 4. **Review.** Dispatch one `flow:reviewer` per axis together in one message, in the
-   foreground: `spec`, `slop`, and each axis under the profile's `## Review axes`. Give each
+   foreground: `spec`, `slop`, and each axis under the profile's `## Review axes` whose
+   `Applies when:` paths (if it has the line) the step's diff touches; name skipped axes in
+   the round. Give each
    the step file, `goal.md`, base commit, gate report path, its axis, and the shared folder
    path.
 5. **Collect.** Keep findings per axis: one axis can mask another, so spec findings are not
