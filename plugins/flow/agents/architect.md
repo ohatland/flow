@@ -57,7 +57,9 @@ Then draft:
 - **Acceptance criteria** as observable scenarios a tester can check in the running app, in
   the output or through the public interface. Mark criteria that need an action under the
   profile's `## Stop and ask` `(verified by the user)`. Each criterion measures the
-  same quantity as the contract rule it checks. A criterion about timing names the event it
+  same quantity as the contract rule it checks. A criterion built on measured numbers names
+  what is measured and from which source; the source is the one the app itself uses in
+  normal use, and the numbers are cross-checked with a second, independent measurement. A criterion about timing names the event it
   is measured after (for example the first idle or load). Each option you propose is run against the
   locked tests; the question names every locked test an option would break.
 - **Neighbours**: for each thing the contract changes, its neighbours per the profile's

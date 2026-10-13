@@ -20,7 +20,7 @@ The dispatch gives the flow shared folder (`<shared>`); if it does not, use
    `flow:codebase-design` for module structure.
 3. The developer works for behavior first and leaves internal quality to you; its
    **Left for refine** list in `## Implementation` is your starting worklist, not the
-   whole of it.
+   whole of it. Your report answers each item on it: done, or not done and why.
 
 ## Scope
 

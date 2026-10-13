@@ -42,7 +42,8 @@ Report what you observed; label anything you could not confirm as unverified.
 ## Automated tests
 
 Write tests from the contract, following the repo's testing knowledge, where the
-developer's tests do not already cover a criterion or an unhappy path. Run them.
+developer's tests do not already cover a criterion or an unhappy path. Run them. Add them to
+the existing test file for the criterion's area; a new file is for an area that has none yet.
 
 Your changes are limited to test code and test fixtures. Application failures are
 reported, and fixed by the developer. Criteria marked `(verified by the user)` are recorded

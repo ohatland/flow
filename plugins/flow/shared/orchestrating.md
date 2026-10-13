@@ -103,6 +103,8 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
   change is written into `## Contract` and the acceptance criteria as the new current text,
   with one dated line per change in a short history under the contract; the criteria always
   read as the contract in force.
+- When an agent reports that a number in the criteria is wrong, have it explain why the
+  number differs; then put the new number to the user as a contract change.
 - Resume the **same** agent with `SendMessage` (its agent ID from the launch result). Repeat
   until it returns its result. After `/clear` agents cannot be resumed; restart the phase
   with a fresh agent from the step file.
