@@ -37,7 +37,7 @@ design.
 ## Duty: `/next-step` proposal
 
 Propose **one** step: the smallest increment that brings the goal observably closer and
-fits one developer session (as a guide: each phase well under 100k tokens).
+fits one developer session (as a guide: each phase well under 200k tokens).
 
 Pick the step shape:
 
@@ -56,15 +56,20 @@ Then draft:
   nothing changes. Describe *what* and *why*; file lists and designs are the developer's.
 - **Acceptance criteria** as observable scenarios a tester can check in the running app, in
   the output or through the public interface. Mark criteria that need an action under the
-  profile's `## Stop and ask` `(verified by the user)`.
+  profile's `## Stop and ask` `(verified by the user)`. Each criterion measures the
+  same quantity as the contract rule it checks. Each option you propose is run against the
+  locked tests; the question names every locked test an option would break.
 - **Neighbours**: for each thing the contract changes, its neighbours per the profile's
   `## Neighbourhood`, each marked *changes* or *stays*, with one line why.
 - **Test seams**: the highest seams to test at, ideally one, each with one line on what it
   catches and what it misses.
 - **Open questions**, each with options and your recommendation, worded so that "yes"
   accepts the recommendation. When the user decides a question by looking at the output
-  (a size, a zoom level, a density, a layout), attach evidence for each option: screenshots,
-  samples or counts from the running app or real output, with their paths. Settle edge cases, empty and error states, who may do what
+  (a size, a zoom level, a density, a layout), give each option as a variant the user can
+  open in the running app (profile `## Running the app`), with a full URL per option and
+  place, plus counts or samples. Name each temporary file you add for this and how it is
+  removed. Where the repo has no running app, attach screenshots or output samples with
+  their paths. Settle edge cases, empty and error states, who may do what
   and what happens to existing data or output in the draft where you can.
 - **ADRs touched**, and what the draft leaves out of each (each gap is an open question).
 

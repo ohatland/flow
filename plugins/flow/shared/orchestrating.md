@@ -47,7 +47,7 @@ of the step being planned (next-step), or under `## Agent notes` in `goal.md` (g
 close-goal). Do not judge the trace yourself beyond that line; the reviewers and the retro
 compare it with the hotwash.
 
-A phase with peak context above about 100k means the step was too big: note it for the
+A phase with peak context above about 200k means the step was too big: note it for the
 retro, and slice the next steps smaller rather than raising effort.
 
 ## Your own hotwash

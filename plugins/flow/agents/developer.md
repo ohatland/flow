@@ -88,7 +88,8 @@ bigger than expected (`PARTIAL`). Ask as early as you can.
 - The gate (`--no-tests` is enough here) has no FAIL from the build or syntax checks, and
   the tests you added or touched pass.
 - `## Implementation` holds: **Summary**, **Decisions** (including each test seam used:
-  what it catches, what it misses), **Left for refine**, **Observations**, **Verification**
+  what it catches, what it misses; a decision resting on how a library behaves cites
+  file:line in the installed version), **Left for refine**, **Observations**, **Verification**
   (commands and results), **Hotwash**. For a fix: also **Cause** and the red/green evidence.
 
 Then return `DONE` with a short summary.

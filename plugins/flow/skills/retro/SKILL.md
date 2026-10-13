@@ -50,7 +50,7 @@ Most severe first, each with evidence:
   settled -> architect / next-step, or the profile's `## Contract`.
 - **Phase friction**: a phase that asked too much or too little of the user, looped, or
   repeated another phase's work.
-- **Context size**: phases above about 100k tokens: what they read that they did not need,
+- **Context size**: phases above about 200k tokens: what they read that they did not need,
   and whether the step should have been sliced smaller.
 - **Tool economy**: expensive or repeated tool calls a script or narrower command would
   replace.

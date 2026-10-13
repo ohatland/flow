@@ -27,7 +27,7 @@ enough for one developer session. It says *what*, never *how*.
 3. **Done?** If every success criterion is met, suggest `/flow:close-goal` and stop.
 4. **Propose.** Dispatch `flow:architect`, duty `/next-step` proposal, with the goal path,
    the previous step file paths, research note paths, the peak context of recent phases from
-   their trace lines (above about 100k means slice smaller), and the shared folder path. It
+   their trace lines (above about 200k means slice smaller), and the shared folder path. It
    answers in its message.
 5. **Approve the contract.** Present the proposal compactly and put the open questions to
    the user in the grilling format. The contract covers exactly the profile's contract
