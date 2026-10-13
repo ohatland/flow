@@ -83,7 +83,8 @@ something, and pass its path to later agents.
 ## Recording decisions
 
 Every decision the user makes also gets one line under `## Decisions so far` in `goal.md`,
-pointing to where it is recorded in full (step Clarifications, Contract, ADR).
+pointing to where it is recorded in full (step Clarifications, Contract, ADR). Edit goal and
+step files with the Edit tool on an anchor that occurs once, one section at a time.
 
 ## Questions and blocks
 

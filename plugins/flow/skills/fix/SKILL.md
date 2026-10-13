@@ -19,7 +19,8 @@ instead of a step file.
 2. **Record.** Write `<state>/goals/fixes/<YYYY-MM-DD>-<slug>.md` from the template in
    `state.md`: Base commit (current `HEAD`), `## Problem` (what happens, with the
    reproduction the user gave), `## Expected` (what should happen and where that is
-   decided). Confirm Expected with the user if it is not written down.
+   decided). Confirm Expected with the user if it is not written down. List every locked
+   file the fix touches or makes obsolete, and get approval for all of them in one question.
 3. **Fix.** Dispatch `flow:developer` with the fix file, the gate command line and the
    shared folder path. It follows its "Bug fixes" section: a red loop with a recorded
    command and output, minimised, 3-5 ranked hypotheses, then the fix with the regression

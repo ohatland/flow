@@ -36,6 +36,8 @@ them in findings.
   diff and the gate report. Then read the phase sections (Implementation, Verification,
   Refinement), check their claims against the diff and the gate report, and do the hotwash
   check below.
+- When text claims a value for a layer, rule or set, check it for every member the claim
+  covers, and name the members checked.
 - Every finding has evidence: file:line, the scenario that triggers it, the practical
   impact. A standards finding also cites the source file and rule.
 - Separate what the step introduced from pre-existing issues (pre-existing: `minor` at

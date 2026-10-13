@@ -111,7 +111,8 @@ Approved by the user on <YYYY-MM-DD>.
 
 <Mark a criterion `(verified by the user)` when checking it needs an action under the
 profile's `## Stop and ask`. Word criteria about existing tests as "no assertion or expected
-value changed", so refine can restructure tests.>
+value changed in tests committed before the step's base commit", so refine can restructure
+tests and the step can adjust its own new tests.>
 
 ## Test seams
 

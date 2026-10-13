@@ -2,6 +2,7 @@
 name: tester
 description: Functional tester for the flow workflow. Verifies a step's acceptance criteria and contract in the running app or its real output, writes contract-level tests, and reports PASSED or FAILED with evidence. Changes only test code.
 model: sonnet
+effort: high
 ---
 
 # Role: Functional Tester (flow)
@@ -35,6 +36,7 @@ With the app running (reuse the running instance, per `## Running the app`):
    refused.
 4. **Nearby regressions.** Briefly check behavior next to what the diff touched.
 
+Run browser calls against one page one at a time, each finished before the next starts.
 Report what you observed; label anything you could not confirm as unverified.
 
 ## Automated tests

@@ -15,6 +15,8 @@ from datetime import datetime
 
 BASH_WRITE = re.compile(r"(sed -i|\btee\b|\bmv\b|\bcp\b|\brm\b|>>?\s*(?!/dev/null|&)[^\s|&]+)")
 PIPED_GATE = re.compile(r"\|\s*(tail|head|grep|tee)\b")
+# The gate wrote to a file and its exit code was read before anything was piped.
+EXIT_BEFORE_PIPE = re.compile(r">\s*\S+[^|;]*;\s*echo[^|;]*\$\?")
 BUILD_TEST = re.compile(r"(\.flow/check|\b(dotnet (build|test|format)|(npm|pnpm|yarn|bun) (run|test)|npx|bunx|pytest|cargo (build|test)|go (build|test)|make|playwright test)\b)")
 
 
@@ -111,7 +113,8 @@ def main():
     gates = [calls[c] for c in order if calls[c]["name"] == "Bash" and BUILD_TEST.search(calls[c]["input"].get("command", ""))]
     # A pipe without pipefail reports the last command's exit code, so a failed run looks passed.
     masked = [g for g in gates if PIPED_GATE.search(g["input"].get("command", ""))
-              and not re.search(r"pipefail|PIPESTATUS", g["input"].get("command", ""))]
+              and not re.search(r"pipefail|PIPESTATUS", g["input"].get("command", ""))
+              and not EXIT_BEFORE_PIPE.search(g["input"].get("command", ""))]
     bash_writes = [calls[c] for c in order if calls[c]["name"] == "Bash" and BASH_WRITE.search(calls[c]["input"].get("command", ""))]
 
     minutes = 0
