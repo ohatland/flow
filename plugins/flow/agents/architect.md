@@ -70,7 +70,8 @@ Then draft:
   accepts the recommendation. When the user decides a question by looking at the output
   (a size, a zoom level, a density, a layout), give each option as a variant the user can
   open in the running app (profile `## Running the app`), with a full URL per option and
-  place, plus counts or samples. Name each temporary file you add for this and how it is
+  place, plus counts or samples. When an option sets a rule over a group (largest, typical,
+  every member), show for each option both the extreme member and the most common one. Name each temporary file you add for this and how it is
   removed. Where the repo has no running app, attach screenshots or output samples with
   their paths. Settle edge cases, empty and error states, who may do what
   and what happens to existing data or output in the draft where you can.

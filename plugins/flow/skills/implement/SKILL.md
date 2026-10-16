@@ -22,6 +22,10 @@ agent.
    `## Implementation` section only. Record its trace line there (`orchestrating.md`). If
    the change needs an action under the profile's `## Stop and ask` to take effect, tell
    the user; it is their call.
+   When the developer's Unsure or observations name a reading of the contract that is
+   the user's to choose (wording that allows two behaviors), put it to the user in the
+   grilling format now and record the answer in `## Clarifications`; verify starts once
+   it is answered.
 5. Set the status to `Verifying`, commit the code, and report in a few lines: what
    changed, the developer's own decisions, and its observations. Call the Skill tool with
    `flow:verify`.
