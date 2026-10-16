@@ -77,6 +77,10 @@ Then draft:
   and what happens to existing data or output in the draft where you can.
 - **ADRs touched**, and what the draft leaves out of each (each gap is an open question).
 
+Before you answer, go through your own Unsure lines: each condition you could not try (a
+setting, a scale, a palette, a place) becomes an acceptance criterion or an open question
+in the draft, so a later phase checks it. The Hotwash then names where each one went.
+
 Use the glossary's vocabulary for every name. Candidate steps in `goal.md` and tasks of a
 design input are ideas to choose from.
 
