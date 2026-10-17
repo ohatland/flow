@@ -28,7 +28,8 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
    concrete evidence; across axes, mark exact duplicates (same file:line and cause) once
    with both axes named.
 6. **Record** `### Round <n>` under `## Review`: the gate result, one findings table per
-   axis (severity, title, file:line, route, `Resolved in` empty; minors have neither),
+   axis (severity, title, file:line, route, `Resolved in` empty; minors have neither until the user chooses to fix them, then they
+   get a route and `Resolved in` like the rest),
    **Where the user should look**, the reviewers' Hotwash checks and Hotwash blocks, and a
    trace line per reviewer.
 7. **Route.** Round 2 or later with blockers or majors left: stop and let the user decide

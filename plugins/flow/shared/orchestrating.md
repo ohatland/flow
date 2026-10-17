@@ -99,7 +99,8 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
 - Put the rest to the user in the grilling format (`grilling.md` next to this file),
   including the agent's recommendation. Do not soften or filter a question the agent
   considered important. For `BLOCKED`, tell the user exactly what to do.
-- Record each question and answer in the step's `## Clarifications`. An approved contract
+- Record each question and answer in the step's `## Clarifications`: the user's literal
+  words in «…», then one line on what they settle, so tests can quote the answer as given. An approved contract
   change is written into `## Contract` and the acceptance criteria as the new current text,
   with one dated line per change in a short history under the contract; the criteria always
   read as the contract in force.
