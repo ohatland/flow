@@ -91,6 +91,7 @@ phase.>
 
 - Goal: [<goal title>](../goal.md)
 - Status: Planned
+- Size: normal
 - Base commit: <hash of HEAD when the contract was approved>
 
 ## Task
@@ -162,6 +163,8 @@ user.>
 ## Retro
 ```
 
+A chore (skill `fix`) has `## Change` in place of `## Problem` and `## Expected`.
+
 ## process-log.md
 
 ```markdown
@@ -183,6 +186,15 @@ merged changes.
 
 `Planned` -> `Implementing` -> `Verifying` -> `Refining` -> `Reviewing` -> `Done`, and back
 when a phase sends work back.
+
+## Size
+
+`Size: normal` runs every phase. `Size: small` is for a step whose expected diff is a few files
+and whose every acceptance criterion is checked by tests the gate runs, with nothing to judge in
+the running app or by eye: it goes `Implementing` -> `Reviewing`, the developer brings its own
+diff to the conventions (no refine), and the final review runs `spec` and the profile axes whose
+`Applies when:` paths the diff touches. The architect proposes the size; the user approves it
+with the contract.
 
 ## Finding a step
 

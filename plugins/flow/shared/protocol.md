@@ -15,8 +15,10 @@ Research notes, when the dispatch names them, replace exploring the same ground 
 
 Run the gate with its output redirected to a file (`<gate> <base> > <scratch>/gate.txt 2>&1`)
 and read its `SUMMARY` there, so its exit code is the gate's own. Builds and test runs go
-the same way: to a file, or behind `set -o pipefail` when piped. Write your part of the step
-file under your phase's `##` heading, above the next `##` heading.
+the same way: to a file, or behind `set -o pipefail` when piped. The full gate is the last
+act of your phase, run once, and once more after each fix of what it found; while working,
+run the narrowest test command the repo's knowledge gives (one file, one test). Write your
+part of the step file under your phase's `##` heading, above the next `##` heading.
 
 The repo describes itself in its profile, `.flow/project.md` (`profile.md` next to this
 file). Load the sections your role names, and the knowledge its `## Knowledge` section lists

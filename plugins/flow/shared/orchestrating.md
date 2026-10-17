@@ -131,9 +131,11 @@ branch the profile protects.
 - Update the status, commit, and give the user a short report (a few lines).
 - Then start the next phase yourself by calling the Skill tool with the next skill
   (`flow:verify`, `flow:refine`, `flow:final-review`, `flow:retro`):
-  implement -> verify -> refine -> final-review -> retro run as a chain without asking
-  between them. Stop only for decisions that are the user's. `/flow:goal`,
-  `/flow:next-step` and `/flow:close-goal` stay user-invoked.
+  implement -> verify -> refine -> final-review run as a chain without asking between
+  them; a step with `Size: small` (`state.md`) goes implement -> final-review. The retro
+  runs when it is due: the profile's `## Records` names the cadence (default after every
+  third `Done` step), and always at close-goal or on demand. Stop only for decisions that
+  are the user's. `/flow:goal`, `/flow:next-step` and `/flow:close-goal` stay user-invoked.
 - If the agent fails or gives up, report that plainly with its reason. Never finish the
   phase's work yourself.
 

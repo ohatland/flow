@@ -1,6 +1,6 @@
 ---
 name: final-review
-description: Final gate for a flow step - the gate, parallel reviewers (spec, slop and the profile's axes), route findings, then mark Done and run the retro.
+description: Final gate for a flow step - the gate, parallel reviewers (spec, slop and the profile's axes), route findings, then mark Done and run the retro when it is due.
 argument-hint: "[step-file | goal-slug]"
 ---
 
@@ -20,7 +20,8 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
 4. **Review.** Dispatch one `flow:reviewer` per axis together in one message, in the
    foreground: `spec`, `slop`, and each axis under the profile's `## Review axes` whose
    `Applies when:` paths (if it has the line) the step's diff touches; name skipped axes in
-   the round. Give each
+   the round. For `Size: small`: `spec` and the axes whose `Applies when:` paths the diff
+   touches, nothing else. Give each
    the step file, `goal.md`, base commit, gate report path, its axis, and the shared folder
    path.
 5. **Collect.** Keep findings per axis: one axis can mask another, so spec findings are not
@@ -37,8 +38,12 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
    - No `blocker` or `major`: set `Status: Done`, add a row to the goal's Progress table
      (step, result, direction from the gate if it has one, learned, peak context
      impl/verify/refine/review), and give the user the digest. Write your own `## Hotwash`
-     in the step file (`orchestrating.md`), then call the Skill tool with `flow:retro` for
-     this step. After the retro, stop the app if you started it, and suggest
+     in the step file (`orchestrating.md`). Then the retro, if it is due: count the `Done`
+     steps whose `## Retro` is empty, this one included; when they reach the profile's
+     cadence (`## Records`, `Retro:`, default 3), call the Skill tool with `flow:retro` for
+     those steps. Otherwise add one dated line per open friction item from the hotwashes
+     (yours and the agents' Improve lines that name the process) to
+     `<state>/goals/process-log.md`. Then stop the app if you started it, and suggest
      `/flow:handoff` + `/clear` before `/flow:next-step` (or `/flow:close-goal` if the
      success criteria look met).
    - Findings routed to `user`: put them to the user in the grilling format first.

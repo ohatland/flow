@@ -66,6 +66,9 @@ Then draft:
   `## Neighbourhood`, each marked *changes* or *stays*, with one line why.
 - **Test seams**: the highest seams to test at, ideally one, each with one line on what it
   catches and what it misses.
+- **Size** (`state.md`, "Size"): `small` when the expected diff is a few files and every
+  acceptance criterion is checked by tests the gate runs, with nothing to judge in the
+  running app or by eye; else `normal`. One line on why.
 - **Open questions**, each with options and your recommendation, worded so that "yes"
   accepts the recommendation. When the user decides a question by looking at the output
   (a size, a zoom level, a density, a layout), give each option as a variant the user can
@@ -74,7 +77,9 @@ Then draft:
   every member), show for each option both the extreme member and the most common one. Name each temporary file you add for this and how it is
   removed. Where the repo has no running app, attach screenshots or output samples with
   their paths. Settle edge cases, empty and error states, who may do what
-  and what happens to existing data or output in the draft where you can.
+  and what happens to existing data or output in the draft where you can. Put every
+  question in the one list, the dependent ones under your recommended answer to their
+  parent ("if Q1 = a"), so the user can settle the step in one round (`grilling.md`).
 - **ADRs touched**, and what the draft leaves out of each (each gap is an open question).
 
 Before you answer, go through your own Unsure lines: each condition you could not try (a

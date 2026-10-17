@@ -23,7 +23,10 @@ Word each question so that "yes" accepts your recommended answer. The user can t
 approve a whole round with "yes to all" without accidentally choosing the other option.
 
 Each answered round reshapes the tree: recompute the frontier and ask the next round. A
-question that depends on another question still open in this round belongs to a later round.
+question that depends on another question still open in this round goes in the same round
+when your recommendation for the parent is firm: ask it under that assumption, marked
+"if Q1 = a", so one round usually settles a step, and it lapses if the user chooses
+otherwise. Only a child whose parent is a genuine toss-up waits for the next round.
 
 Finding **facts** is your job, never the user's. When a question needs a fact from the code,
 the docs or tools, dispatch a subagent (Explore, or the architect) to find it; do not ask the

@@ -21,9 +21,9 @@ enough for one developer session. It says *what*, never *how*.
    if not, tell the user and stop. `git status --short` must be clean, or the user decides
    what to do with the changes.
 2. **Read** `goal.md`, the previous steps' Task and Retro sections, and
-   `git log --oneline <goal base>..HEAD`. If the latest step is `Done` with an empty
-   `## Retro` section, call the Skill tool with `flow:retro` on it first; its candidate
-   steps are input here.
+   `git log --oneline <goal base>..HEAD`. If a retro is due (the `Done` steps with an empty
+   `## Retro` section have reached the profile's cadence, `## Records`), call the Skill
+   tool with `flow:retro` first; its candidate steps are input here.
 3. **Done?** If every success criterion is met, suggest `/flow:close-goal` and stop.
 4. **Propose.** Dispatch `flow:architect`, duty `/next-step` proposal, with the goal path,
    the previous step file paths, research note paths, the peak context of recent phases from
@@ -34,12 +34,14 @@ enough for one developer session. It says *what*, never *how*.
    categories. Do not ask about internal code structure. Questions the user decides by
    looking at the output come with the architect's evidence per option. Get explicit approval of the
    contract and of the acceptance criteria. Show the proposed test seams in one line each;
-   they are accepted unless the user objects. If the step looks bigger than one session,
-   propose a split (a prefactor step first, or expand / migrate / contract for a wide
-   mechanical change).
+   they are accepted unless the user objects. Present the proposed size (`state.md`,
+   "Size"): `small` skips verify and refine and narrows the review, so name what makes
+   the step qualify; the user approves it with the contract. If the step looks bigger than
+   one session, propose a split (a prefactor step first, or expand / migrate / contract for
+   a wide mechanical change).
 6. **Write** `<state>/goals/<goal>/steps/<NN>-<slug>.md` from the template in `state.md`
-   (numbering from `01`), Status `Planned`, Base commit = current `HEAD`, with today's
-   approval date, and the Test seams. Record the answered questions under
+   (numbering from `01`), Status `Planned`, the approved Size, Base commit = current
+   `HEAD`, with today's approval date, and the Test seams. Record the answered questions under
    `## Clarifications` and a line per decision under `## Decisions so far` in `goal.md`.
 7. **Next.** Call the Skill tool with `flow:implement` unless the user wants to stop here
    (for example to hand off to a fresh session first).

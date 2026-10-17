@@ -16,7 +16,7 @@ agent.
 2. Set the status to `Implementing` and dispatch `flow:developer` with the step file,
    `goal.md`, the base commit, the gate command line, open items to fix first
    (Verification failures, review findings routed to `implement` with an empty
-   `Resolved in`), and the shared folder path.
+   `Resolved in`), the step's Size, and the shared folder path.
 3. Handle `QUESTIONS`, `BLOCKED` and `PARTIAL` per `orchestrating.md`.
 4. On `DONE`: look at `git status --short` and `git diff --stat`, and the agent's
    `## Implementation` section only. Record its trace line there (`orchestrating.md`). If
@@ -26,6 +26,7 @@ agent.
    the user's to choose (wording that allows two behaviors), put it to the user in the
    grilling format now and record the answer in `## Clarifications`; verify starts once
    it is answered.
-5. Set the status to `Verifying`, commit the code, and report in a few lines: what
-   changed, the developer's own decisions, and its observations. Call the Skill tool with
-   `flow:verify`.
+5. Commit the code and report in a few lines: what changed, the developer's own decisions,
+   and its observations. Then set the status to `Verifying` and call the Skill tool with
+   `flow:verify`; for `Size: small`, set it to `Reviewing` and call `flow:final-review`
+   instead.

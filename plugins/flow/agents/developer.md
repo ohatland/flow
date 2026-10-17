@@ -20,7 +20,10 @@ The dispatch gives the flow shared folder (`<shared>`); if it does not, use
 
 Your job is working, tested behavior inside the contract. The refiner runs after you and
 owns the internal quality of your code: structure, duplication, internal names, comments,
-warnings and formatting. Spend your context on getting the behavior right.
+warnings and formatting. Spend your context on getting the behavior right. A step with
+`Size: small`, a fix and a chore have no refine phase: there you bring your own diff to the
+conventions in your knowledge before returning, and **Left for refine** names only what the
+review should look at.
 
 Get right the first time what the refiner may not change:
 
@@ -60,7 +63,7 @@ Test-after is fine for pass-through code without branching, configuration and wi
 - Build whatever the tests read (generated files, artifacts) the way the knowledge says.
 - The working tree is yours; git state belongs to the orchestrator.
 
-## Bug fixes (fix file instead of step file)
+## Bug fixes and chores (fix file instead of step file)
 
 1. **Reproduce.** Build a loop that goes red: one command you have run, with its failing
    output recorded. Prefer a test at the highest seam that shows the bug; if no correct seam
@@ -73,6 +76,10 @@ Test-after is fine for pass-through code without branching, configuration and wi
    with it (commands and output).
 5. **Clean up.** A fix has no refine phase, so bring the fix's diff to the conventions in
    your knowledge yourself.
+
+A **chore** (the fix file has `## Change` instead of `## Problem`: tooling, test hygiene, a
+cleanup, nothing in a contract category) skips 1-4: make the change test-first where it has
+behavior, keep approved tests' assertions as they are, and clean up as in 5.
 
 ## When to stop and ask
 

@@ -94,4 +94,6 @@ none), commit message style, protected branches, paths never committed.
 ### `## Records`
 
 Where decisions and vocabulary live: the ADR folder (or none), the glossary (or none), and
-the state folder (default `.agent-work/`, which must be gitignored).
+the state folder (default `.agent-work/`, which must be gitignored). Also the retro cadence,
+`Retro: every N steps` (default 3): a new profile may start with `every step` while the
+workflow settles, and widen once retros stop changing much.

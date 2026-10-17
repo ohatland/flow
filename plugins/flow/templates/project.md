@@ -68,4 +68,5 @@ the only check.>
 
 - ADRs: <folder, or none>
 - Glossary: <file, or none>
+- Retro: every 3 steps
 - State: `.agent-work/` (gitignored)

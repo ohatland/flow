@@ -1,6 +1,6 @@
 ---
 name: retro
-description: Retrospective on how the flow workflow is working - turn friction from hotwashes, traces, step files and the process log into improvements to the plugin, the repo's profile or its knowledge, approved by the user one by one. Runs after every step, at close-goal, or on demand.
+description: Retrospective on how the flow workflow is working - turn friction from hotwashes, traces, step files and the process log into improvements to the plugin, the repo's profile or its knowledge, approved by the user one by one. Runs when due (the profile's cadence, default every third Done step), at close-goal, or on demand.
 argument-hint: "[step-file | goal-slug | since-date]"
 ---
 
@@ -11,7 +11,8 @@ You improve the **workflow**, not the product code. Follow
 
 ## 1. Scope and sources
 
-- **After a step**: that step file, plus open entries in `<state>/goals/process-log.md`.
+- **After steps**: the `Done` step files whose `## Retro` is empty (one or several,
+  depending on the profile's cadence), plus open entries in `<state>/goals/process-log.md`.
 - **After a goal**: all the goal's step files and the open log entries.
 - **On demand**: everything since the newest line under `## Retros` in the process log.
 
@@ -93,7 +94,8 @@ Product code issues from Observations are candidate steps for `goal.md`, listed 
 - **Repo knowledge and profile** changes: in this repo, committed separately from product
   code, in the profile's commit style.
 
-Record: each proposal and its outcome in the step or fix file's `## Retro` (for a
-goal-scope retro, in `goal.md` under `## Retrospective`), candidate steps under
+Record: each proposal and its outcome in the newest covered step's `## Retro`, with a
+one-line pointer to it in the other covered steps' `## Retro` (a fix: in the fix file; a
+goal-scope retro: in `goal.md` under `## Retrospective`), candidate steps under
 `## Candidate steps` in `goal.md`, and in `<state>/goals/process-log.md` remove handled
 entries and add a dated line under `## Retros` with the scope and what changed.
