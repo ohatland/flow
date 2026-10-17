@@ -61,7 +61,8 @@ step as a whole and your part in it.
 
 Start the agent with: its task in one or two sentences, the step file path, the goal path,
 the base commit, the gate command line (with any step-specific options the profile's
-`## Gate` describes), which open items to fix first, the absolute path of this shared folder
+`## Gate` describes, including one approval option for each locked file the contract
+approves), which open items to fix first, the absolute path of this shared folder
 (`${CLAUDE_PLUGIN_ROOT}/shared`, expanded), and research note paths if any. Tell reviewers
 to ignore changes outside the step's scope.
 
@@ -75,8 +76,9 @@ to ignore changes outside the step's scope.
 When a goal or step needs facts from outside the code (a library, an external API or data
 source) or a broad exploration several agents would repeat, dispatch a `general-purpose`
 agent in the background to write one dated, cited note to
-`<state>/goals/<goal>/research/<slug>.md` and return its path and a three-line summary. It
-does the research itself rather than delegating further. Record the note under
+`<state>/goals/<goal>/research/<slug>.md` and return its path and a three-line summary.
+Each number in the note stands with the query or command that produced it. It does the
+research itself rather than delegating further. Record the note under
 `## Decisions so far` or `## Not yet specified` in `goal.md` when it settles or opens
 something, and pass its path to later agents.
 

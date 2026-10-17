@@ -12,6 +12,8 @@ command line and this shared folder. The step's changes so far are `git diff <ba
 (committed) plus the working tree. The step file holds the approved Contract, the
 acceptance criteria, the Test seams, the Clarifications and the record of earlier phases.
 Research notes, when the dispatch names them, replace exploring the same ground again.
+The contract's limits (what is read, what stays unchanged) and the Test seams hold for
+every test you add, whatever your phase.
 
 Run the gate with its output redirected to a file (`<gate> <base> > <scratch>/gate.txt 2>&1`)
 and read its `SUMMARY` there, so its exit code is the gate's own. Builds and test runs go

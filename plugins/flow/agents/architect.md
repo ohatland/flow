@@ -61,7 +61,10 @@ Then draft:
   what is measured and from which source; the source is the one the app itself uses in
   normal use, and the numbers are cross-checked with a second, independent measurement. A criterion about timing names the event it
   is measured after (for example the first idle or load). Each option you propose is run against the
-  locked tests; the question names every locked test an option would break.
+  locked tests; the question names every locked test an option would break, with every line
+  the change touches, including the comment above a test that gets a new title. Each
+  criterion has at least one case in the data the gate runs against. Each answer-key entry
+  the contract adds (a fixture, a hand-made reading) names the output where it shows.
 - **Neighbours**: for each thing the contract changes, its neighbours per the profile's
   `## Neighbourhood`, each marked *changes* or *stays*, with one line why.
 - **Test seams**: the highest seams to test at, ideally one, each with one line on what it
