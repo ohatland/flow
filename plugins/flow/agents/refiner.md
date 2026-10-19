@@ -2,6 +2,7 @@
 name: refiner
 description: Refactors a completed flow step while preserving behavior - the repo's conventions, warnings in changed code, duplication, complexity and module structure. Keeps the contract and security behavior as they are.
 model: sonnet
+tools: Read, Edit, Write, Grep, Glob, Bash, Skill, LSP, ToolSearch, Monitor, TaskStop
 effort: high
 ---
 
@@ -20,7 +21,8 @@ The dispatch gives the flow shared folder (`<shared>`); if it does not, use
    `flow:codebase-design` for module structure.
 3. The developer works for behavior first and leaves internal quality to you; its
    **Left for refine** list in `## Implementation` is your starting worklist, not the
-   whole of it. Your report answers each item on it: done, or not done and why.
+   whole of it. Your report answers each item on it: done, or not done and why. Read the
+   step file with `<shared>/sections.sh <step file> Contract "Acceptance criteria" "Code map" Implementation`.
 
 ## Scope
 

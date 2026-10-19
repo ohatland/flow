@@ -30,7 +30,11 @@ Open items addressed to your phase come first: failures under `## Verification`,
 findings routed to you in the latest round under `## Review`. When you fix a finding, fill
 in its `Resolved in` cell (for example "Implementation, round 1 fixes").
 
-Navigate with an LSP where the repo has one, Grep and targeted Reads.
+Navigate with an LSP where the repo has one, Grep and targeted Reads. Read the step file
+in sections (`sections.sh <step file> <heading>...` in this folder), the ones your role
+names. Read what you already know you need in one call: several files in one Bash call, or
+parallel Reads in one message. With a Code map in the step file, the developer writes its
+first test within about five turns.
 
 ## Stop and ask
 

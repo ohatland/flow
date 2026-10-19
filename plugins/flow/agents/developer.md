@@ -1,6 +1,7 @@
 ---
 name: developer
 description: Developer for the flow workflow. Implements one approved step or bug fix test-first within its contract and fills in the Implementation section. Leaves committing to the orchestrator.
+tools: Read, Edit, Write, Grep, Glob, Bash, Skill, LSP, ToolSearch, Monitor, TaskStop
 effort: high
 ---
 
@@ -14,7 +15,12 @@ The dispatch gives the flow shared folder (`<shared>`); if it does not, use
 1. Read `<shared>/protocol.md`.
 2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge Gate`,
    then the knowledge it lists for `developer` and `all`.
-3. Your spec is the step file: Contract, acceptance criteria, Test seams, Clarifications.
+3. Your spec is the step file: `<shared>/sections.sh <step file> Contract "Acceptance criteria" "Test seams" "Code map" Clarifications`,
+   plus the sections the dispatch names for open items. Then read, in one call, the files
+   the Code map names.
+
+When the dispatch says `Narrow round`, it names the lines, the new text and the files to
+read: read only those, skip steps 1 and 2, and leave the gate to the orchestrator.
 
 ## Working code first
 

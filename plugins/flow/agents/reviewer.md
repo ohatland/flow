@@ -33,8 +33,8 @@ them in findings.
   step's scope count only when the step caused them.
 - Review blind first: read the step file only up to `## Implementation`
   (`sed -n '1,/^## Implementation/p' <step-file>`), and form your findings from that, the
-  diff and the gate report. Then read the phase sections (Implementation, Verification,
-  Refinement), check their claims against the diff and the gate report, and do the hotwash
+  diff and the gate report. Then read the phase sections with `<shared>/sections.sh`
+  (Implementation, Verification, Refinement, and the latest `### Round`), check their claims against the diff and the gate report, and do the hotwash
   check below.
 - When text claims a value for a layer, rule or set, check it for every member the claim
   covers, and name the members checked.

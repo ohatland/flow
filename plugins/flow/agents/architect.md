@@ -37,7 +37,9 @@ design.
 ## Duty: `/next-step` proposal
 
 Propose **one** step: the smallest increment that brings the goal observably closer and
-fits one developer session (as a guide: each phase well under 200k tokens).
+fits one developer session. Estimate the implement phase's peak context, counting the
+step file, the knowledge, the test helpers and every test file the step adds; above about
+150k, propose a smaller slice.
 
 Pick the step shape:
 
@@ -69,6 +71,10 @@ Then draft:
   `## Neighbourhood`, each marked *changes* or *stays*, with one line why.
 - **Test seams**: the highest seams to test at, ideally one, each with one line on what it
   catches and what it misses.
+- **Code map** (not part of the contract): what you found while surveying, so the developer
+  starts writing instead of searching: the files and symbols that change (file:symbol), the
+  helpers and exports to reuse, the test files to copy the pattern from, and the commands
+  you ran for data and counts. Ten to twenty lines.
 - **Size** (`state.md`, "Size"): `small` when the expected diff is a few files and every
   acceptance criterion is checked by tests the gate runs, with nothing to judge in the
   running app or by eye; else `normal`. One line on why.

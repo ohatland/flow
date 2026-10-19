@@ -19,7 +19,8 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
    gate failures as the round's findings and go to step 6.
 4. **Review.** Dispatch one `flow:reviewer` per axis together in one message, in the
    foreground: `spec`, `slop`, and each axis under the profile's `## Review axes` whose
-   `Applies when:` paths (if it has the line) the step's diff touches; name skipped axes in
+   `Applies when:` paths (if it has the line) the step's diff touches (from round 2: the diff
+   since the previous round; `spec` always runs); name skipped axes in
    the round. For `Size: small`: `spec` and the axes whose `Applies when:` paths the diff
    touches, nothing else. Give each
    the step file, `goal.md`, base commit, gate report path, its axis, and the shared folder

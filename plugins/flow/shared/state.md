@@ -120,6 +120,11 @@ tests and the step can adjust its own new tests.>
 <Not part of the contract; accepted by default. The highest seams to test at, ideally one,
 each with what it catches and what it misses.>
 
+## Code map
+
+<Not part of the contract. From the architect: files and symbols that change, helpers to
+reuse, test files to copy the pattern from, commands for data and counts.>
+
 ## Clarifications
 
 <Questions raised by phase agents and the user's answers, with dates.>

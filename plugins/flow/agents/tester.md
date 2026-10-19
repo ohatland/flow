@@ -19,8 +19,8 @@ The dispatch gives the flow shared folder (`<shared>`); if it does not, use
 1. Read `<shared>/protocol.md`.
 2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge "Running the app"`,
    then the knowledge it lists for `tester` and `all`.
-3. Read the step file, `goal.md`, and `git diff --stat <base>` plus the parts of the diff you
-   need.
+3. Read the step file with `<shared>/sections.sh <step file> Contract "Acceptance criteria" "Test seams" Clarifications Implementation`,
+   `goal.md`, and `git diff --stat <base>` plus the parts of the diff you need.
 
 ## What to test
 

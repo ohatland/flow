@@ -41,7 +41,7 @@ enough for one developer session. It says *what*, never *how*.
    a wide mechanical change).
 6. **Write** `<state>/goals/<goal>/steps/<NN>-<slug>.md` from the template in `state.md`
    (numbering from `01`), Status `Planned`, the approved Size, Base commit = current
-   `HEAD`, with today's approval date, and the Test seams. Record the answered questions under
+   `HEAD`, with today's approval date, the Test seams and the Code map. Record the answered questions under
    `## Clarifications` and a line per decision under `## Decisions so far` in `goal.md`.
 7. **Next.** Call the Skill tool with `flow:implement` unless the user wants to stop here
    (for example to hand off to a fresh session first).

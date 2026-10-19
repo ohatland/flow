@@ -47,7 +47,7 @@ of the step being planned (next-step), or under `## Agent notes` in `goal.md` (g
 close-goal). Do not judge the trace yourself beyond that line; the reviewers and the retro
 compare it with the hotwash.
 
-A phase with peak context above about 200k means the step was too big: note it for the
+A phase with peak context above about 150k means the step was too big: note it for the
 retro, and slice the next steps smaller rather than raising effort.
 
 ## Your own hotwash
@@ -70,6 +70,11 @@ to ignore changes outside the step's scope.
   together in one message so you aggregate their reports as they return.
 - **Background** for legwork you do not wait on (research, exploration) while you keep
   talking with the user.
+
+A round whose open items are only wording (comments, test heads, the step file), with the
+wording settled by the user, is a **narrow round**: the dispatch says `Narrow round` and
+gives the lines, the new text and the files to read; you run the gate; its review is
+`spec` only.
 
 ## Research
 
@@ -94,6 +99,8 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
 
 - Answer what you can from code, the profile, ADRs, the glossary, the goal and earlier
   clarifications yourself.
+- A number, a scope or a source claim in a question to the user is quoted from the research
+  note, the measurement file or the step file, with its path.
 - Never decide yourself what the user controls: the contract categories, ADRs, anything
   under the profile's `## Stop and ask`. Approval must be explicit and name each item, for
   example "Q1 a, Q2 b" or "yes to all three". A general "ok, continue" is not approval of a
