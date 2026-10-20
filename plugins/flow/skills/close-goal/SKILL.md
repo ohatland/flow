@@ -19,7 +19,7 @@ continue. The goal base is `Base commit` in `goal.md`.
 First run the **gate** over the goal, `.flow/check <goal base> --all-tests`, with output to
 a file: the reviewer needs its report, and it may build and test, which would disturb the
 tester's running app. Then start the app per the profile if needed, and launch these
-together in one message (foreground; you aggregate them):
+together in one message (wait for all three; you aggregate them):
 
 - **Verify.** `flow:tester` verifies the goal's **success criteria** end to end. It reports
   in its message only; it does not edit step files.

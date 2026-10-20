@@ -12,7 +12,8 @@ agent.
 
 1. **Find the step** with status `Refining`.
 2. Dispatch `flow:refiner` with the step file, `goal.md`, the base commit, the gate command
-   line, open findings routed to `refine`, and the shared folder path.
+   line, open findings routed to `refine`, and the shared folder path; in a later round,
+   resume the step's refiner with them instead (`orchestrating.md`, "One agent per role").
 3. On `DONE`: run the gate with output saved to a file and read the summary. A FAIL sends
    the refiner back (same agent, `SendMessage`). Then compare the refiner's files
    (`git status --porcelain`, new files included) with `git diff --name-only <base> HEAD`:

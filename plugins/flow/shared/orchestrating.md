@@ -29,9 +29,9 @@ This is what makes the workflow scale; the role agents carry the heavy context, 
 
 ## Trace every agent
 
-An agent's hotwash is its own account; the trace is what it actually did. When a role agent
-returns its final result (after any `QUESTIONS` rounds; a resumed agent appends to the same
-transcript), run:
+An agent's hotwash is its own account; the trace is what it actually did. Each time a role agent
+returns its final result for a round (after any `QUESTIONS`; a resumed agent appends to the
+same transcript, so the trace covers every round so far), run:
 
 ```bash
 ${CLAUDE_PLUGIN_ROOT}/shared/trace.py <agent-id> --out <goal-dir>/traces/<NN>-<phase>-<role>.txt
@@ -66,15 +66,29 @@ approves), which open items to fix first, the absolute path of this shared folde
 (`${CLAUDE_PLUGIN_ROOT}/shared`, expanded), and research note paths if any. Tell reviewers
 to ignore changes outside the step's scope.
 
-- **Foreground** for results you act on next: phase agents, and reviewers launched
-  together in one message so you aggregate their reports as they return.
-- **Background** for legwork you do not wait on (research, exploration) while you keep
-  talking with the user.
+- **Wait** for phase agents and reviewers before you act on their results; launch a round's
+  reviewers together in one message and aggregate their reports as they return.
+- **Do not wait** on legwork (research) while you keep talking with the user.
+
+## One agent per role
+
+A step has one agent per role: one architect, one developer, one tester, one refiner and one
+reviewer per review axis. The first time a role is needed in the step, start it with the full
+dispatch above and record its ID under `## Agents` in the step or fix file (`developer: <id>`,
+`reviewer spec: <id>`). Every later round resumes that same agent with `SendMessage` (load the
+tool first if the session lists it as deferred): the round number, the open items addressed
+to it, the commit the round starts from, and the gate command line if it changed. It already
+knows the step, so the message is short.
+
+Start a new agent of the role, and replace its line under `## Agents`, only when the old one
+cannot be resumed (after `/clear`, in a new session, or `SendMessage` fails) or its last trace
+shows a peak context above about 150k. Questions to settle facts while planning go to the
+step's architect the same way, not to a new agent.
 
 A round whose open items are only wording (comments, test heads, the step file), with the
-wording settled by the user, is a **narrow round**: the dispatch says `Narrow round` and
-gives the lines, the new text and the files to read; you run the gate; its review is
-`spec` only.
+wording settled by the user, is a **narrow round**: the message to the developer says
+`Narrow round` and gives the lines and the new text; you run the gate; its review is `spec`
+only.
 
 ## Research
 
@@ -119,10 +133,11 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
   until it returns its result. After `/clear` agents cannot be resumed; restart the phase
   with a fresh agent from the step file.
 
-When an agent returns `PARTIAL`, record its proposal, then either dispatch a fresh agent of
-the same role for the remainder (default when the remainder is clearly inside the contract)
-or, if the remainder is large, propose to the user to end the step at a coherent point and
-plan the rest with `/flow:next-step`.
+When an agent returns `PARTIAL`, record its proposal, then either resume the same agent for
+the remainder (default when the remainder is clearly inside the contract; a new agent per
+"One agent per role" when its context is above about 150k) or, if the remainder is large,
+propose to the user to end the step at a coherent point and plan the rest with
+`/flow:next-step`.
 
 ## Commits
 
@@ -141,9 +156,10 @@ branch the profile protects.
 - Then start the next phase yourself by calling the Skill tool with the next skill
   (`flow:verify`, `flow:refine`, `flow:final-review`, `flow:retro`):
   implement -> verify -> refine -> final-review run as a chain without asking between
-  them; a step with `Size: small` (`state.md`) goes implement -> final-review. The retro
-  runs when it is due: the profile's `## Records` names the cadence (default after every
-  third `Done` step), and always at close-goal or on demand. Stop only for decisions that
+  them; a step with `Size: small` (`state.md`) goes implement -> final-review, and a
+  review round's fixes take the shortest path back (`flow:implement`, step 5). The retro
+  is **due** when the `Done` steps whose `## Retro` is empty reach the cadence in the
+  profile's `## Records` (`Retro:`, default 3); it also runs at close-goal and on demand. Stop only for decisions that
   are the user's. `/flow:goal`, `/flow:next-step` and `/flow:close-goal` stay user-invoked.
 - If the agent fails or gives up, report that plainly with its reason. Never finish the
   phase's work yourself.

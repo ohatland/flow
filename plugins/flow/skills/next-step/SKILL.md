@@ -21,13 +21,12 @@ enough for one developer session. It says *what*, never *how*.
    if not, tell the user and stop. `git status --short` must be clean, or the user decides
    what to do with the changes.
 2. **Read** `goal.md`, the previous steps' Task and Retro sections, and
-   `git log --oneline <goal base>..HEAD`. If a retro is due (the `Done` steps with an empty
-   `## Retro` section have reached the profile's cadence, `## Records`), call the Skill
-   tool with `flow:retro` first; its candidate steps are input here.
+   `git log --oneline <goal base>..HEAD`. If the retro is due (`orchestrating.md`, "Finishing
+   a phase"), call the Skill tool with `flow:retro` first; its candidate steps are input here.
 3. **Done?** If every success criterion is met, suggest `/flow:close-goal` and stop.
 4. **Propose.** Dispatch `flow:architect`, duty `/next-step` proposal, with the goal path,
    the previous step file paths, research note paths, the peak context of recent phases from
-   their trace lines (above about 200k means slice smaller), and the shared folder path. It
+   their trace lines (above about 150k means slice smaller), and the shared folder path. It
    answers in its message.
 5. **Approve the contract.** Present the proposal compactly and put the open questions to
    the user in the grilling format. The contract covers exactly the profile's contract
@@ -41,7 +40,8 @@ enough for one developer session. It says *what*, never *how*.
    a wide mechanical change).
 6. **Write** `<state>/goals/<goal>/steps/<NN>-<slug>.md` from the template in `state.md`
    (numbering from `01`), Status `Planned`, the approved Size, Base commit = current
-   `HEAD`, with today's approval date, the Test seams and the Code map. Record the answered questions under
+   `HEAD`, with today's approval date, the Neighbours, the Test seams, the Code map and the
+   architect's ID under `## Agents`; questions about this step go to that architect. Record the answered questions under
    `## Clarifications` and a line per decision under `## Decisions so far` in `goal.md`.
 7. **Next.** Call the Skill tool with `flow:implement` unless the user wants to stop here
    (for example to hand off to a fresh session first).

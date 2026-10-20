@@ -29,7 +29,8 @@ when your recommendation for the parent is firm: ask it under that assumption, m
 otherwise. Only a child whose parent is a genuine toss-up waits for the next round.
 
 Finding **facts** is your job, never the user's. When a question needs a fact from the code,
-the docs or tools, dispatch a subagent (Explore, or the architect) to find it; do not ask the
+the docs or tools, ask the step's architect for it (`SendMessage`; `orchestrating.md`, "One
+agent per role"), or an Explore agent when no architect is running; do not ask the
 user for anything you could look up. Only the questions downstream of a running lookup wait.
 The **decisions** are the user's.
 

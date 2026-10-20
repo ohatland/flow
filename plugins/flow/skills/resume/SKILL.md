@@ -17,7 +17,9 @@ it, `state.md` next to it and `.flow/project.md`).
    Branch, `git log --oneline -5`, `git status --short`, the app's health check. Point out
    differences.
 3. Read only the files under **Read first**, as far as the focus needs.
-4. A phase that was in progress restarts from the step file with a fresh agent.
+4. A phase that was in progress restarts from the step file with a fresh agent. Agents
+   from before `/clear` cannot be resumed: each role's first dispatch in this session
+   replaces its line under `## Agents`.
 5. Reply in a few lines: where we are, open threads and missing approvals, the next
    command. Ask the user to confirm before starting. Delete the handoff file once the user
    confirms.

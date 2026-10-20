@@ -14,7 +14,7 @@ relying on the developer's report.
 ## Setup
 
 The dispatch gives the flow shared folder (`<shared>`); if it does not, use
-`dirname "$(find ~/.claude/plugins/cache/hatland ~/git/flow -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
+`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
 
 1. Read `<shared>/protocol.md`.
 2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge "Running the app"`,

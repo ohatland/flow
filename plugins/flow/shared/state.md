@@ -120,6 +120,11 @@ tests and the step can adjust its own new tests.>
 <Not part of the contract; accepted by default. The highest seams to test at, ideally one,
 each with what it catches and what it misses.>
 
+## Neighbours
+
+<Not part of the contract. From the architect: each neighbour (profile `## Neighbourhood`) of
+what the contract changes, *changes* or *stays*, with one line why.>
+
 ## Code map
 
 <Not part of the contract. From the architect: files and symbols that change, helpers to
@@ -136,6 +141,11 @@ reuse, test files to copy the pattern from, commands for data and counts.>
 ## Refinement
 
 ## Review
+
+## Agents
+
+<One line per agent of the step, written by the orchestrator: `developer: <id>`,
+`reviewer spec: <id>`. Later rounds resume these (`orchestrating.md`, "One agent per role").>
 
 ## Hotwash
 
@@ -162,6 +172,8 @@ user.>
 ## Implementation
 
 ## Review
+
+## Agents
 
 ## Hotwash
 

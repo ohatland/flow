@@ -2,7 +2,7 @@
 
 A Claude Code plugin for an orchestrator-style workflow in any repo: one session talks to
 you and dispatches role agents in their own context windows, work is done in small steps
-whose contract you approve, and every step ends with a retro that improves the setup.
+whose contract you approve, and a retro every few steps improves the setup.
 
 The plugin knows the **process**. Each repo describes **itself** in a small profile,
 `.flow/`, and keeps its knowledge (conventions, testing, how to run it) in `CLAUDE.md`,
@@ -17,7 +17,7 @@ Grown out of the AdmMit-AI-Flow plugin and
 /flow:init        once per repo: survey it and write .flow/ with you
 /flow:goal        current state, target state, success criteria (architect)
 /flow:next-step   one small step, contract + acceptance criteria approved by you
-  implement -> verify -> refine -> final-review -> retro      (chained automatically)
+  implement -> verify -> refine -> final-review   (chained; retro when due)
 /flow:close-goal  whole-goal check, docs and glossary sweep, goal retro
 /flow:fix         lighter loop for a bug outside a goal
 /flow:handoff, /clear, /flow:resume            between steps
@@ -30,6 +30,9 @@ Grown out of the AdmMit-AI-Flow plugin and
 | `flow:tester` | the running app or real output, against the acceptance criteria; changes only tests |
 | `flow:refiner` | internal quality without behavior change, ring-scoped around the diff |
 | `flow:reviewer` | read-only, one axis per instance: `spec`, `slop`, the profile's axes, `fix`, `goal` |
+
+A step has one agent per role, and one reviewer per axis. Later rounds resume the same agent
+with `SendMessage`; a new one starts only after `/clear` or above about 150k context.
 
 Knowledge skills shipped with the plugin: `flow:codebase-design`, `flow:testing`.
 
@@ -56,9 +59,10 @@ cd <repo> && claude plugin install flow@hatland --scope project
 ```
 
 Install per project (`--scope project` or `--scope local`), never for the user: another
-plugin named `flow` may be active elsewhere. After editing agents or skills, run
-`/reload-plugins`; if a change does not show, bump `version` in `plugin.json` and run
-`claude plugin marketplace update hatland` and `claude plugin update flow@hatland`.
+plugin named `flow` may be active elsewhere. Claude Code runs an installed copy of the plugin
+that changes only with `version` in `plugin.json`: after editing agents or skills, raise the
+version, run `claude plugin update flow@hatland` for new sessions and `/reload-plugins` in
+open ones.
 
 The helper scripts (`shared/trace.py`, `shared/sections.sh`) and the repo's `.flow/check`
 ask for permission on first use; allow them by path in the repo's `.claude/settings.json`.

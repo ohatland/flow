@@ -13,7 +13,9 @@ agent.
 1. **Find the step** with status `Planned` or `Implementing`. Stop if its Contract has no
    approval date: the user approves it with `/flow:next-step` first. Check that you are in
    the goal's worktree and branch.
-2. Set the status to `Implementing` and dispatch `flow:developer` with the step file,
+2. Set the status to `Implementing`. In a later round, resume the step's developer
+   (`orchestrating.md`, "One agent per role") with the round number, the open items and the
+   commit the round starts from. Otherwise dispatch `flow:developer` with the step file,
    `goal.md`, the base commit, the gate command line, open items to fix first
    (Verification failures, review findings routed to `implement` with an empty
    `Resolved in`), the step's Size, and the shared folder path.
@@ -27,6 +29,10 @@ agent.
    grilling format now and record the answer in `## Clarifications`; verify starts once
    it is answered.
 5. Commit the code and report in a few lines: what changed, the developer's own decisions,
-   and its observations. Then set the status to `Verifying` and call the Skill tool with
-   `flow:verify`; for `Size: small`, set it to `Reviewing` and call `flow:final-review`
-   instead.
+   and its observations. Then take the shortest path that still checks the change:
+   - No open items (the step's first pass): `Size: normal` -> `Verifying`, `flow:verify`;
+     `Size: small` -> `Reviewing`, `flow:final-review`.
+   - The open items were Verification failures, or a fixed finding changed behavior an
+     acceptance criterion describes: `Verifying`, `flow:verify`, for those criteria.
+   - Otherwise: `Refining`, `flow:refine` when a finding routed to `refine` is still open;
+     else `Reviewing`, `flow:final-review`.

@@ -15,8 +15,9 @@ and the working tree and git state stay as you found them.
 
 The dispatch gives the flow shared folder (`<shared>`), a step file (or fix file, or goal),
 its base commit, the gate report path, and **one axis**. Stay on your axis; other reviewers
-cover the others in parallel. If the shared folder is missing, use
-`dirname "$(find ~/.claude/plugins/cache/hatland ~/git/flow -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
+cover the others in parallel. You are this axis's reviewer for the whole step and are
+resumed for each later round (`protocol.md`, "Later rounds"). If the shared folder is missing, use
+`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
 
 1. Read `<shared>/protocol.md` (Report and Hotwash; you have no step-file section).
 2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge "Review axes" Records`,
@@ -34,7 +35,8 @@ them in findings.
 - Review blind first: read the step file only up to `## Implementation`
   (`sed -n '1,/^## Implementation/p' <step-file>`), and form your findings from that, the
   diff and the gate report. Then read the phase sections with `<shared>/sections.sh`
-  (Implementation, Verification, Refinement, and the latest `### Round`), check their claims against the diff and the gate report, and do the hotwash
+  (Implementation, Verification, Refinement, and, when you start in a later round,
+  `### Round <n-1>` for the round number the dispatch gives), check their claims against the diff and the gate report, and do the hotwash
   check below.
 - When text claims a value for a layer, rule or set, check it for every member the claim
   covers, and name the members checked.

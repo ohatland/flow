@@ -17,8 +17,9 @@ every test you add, whatever your phase.
 
 Run the gate with its output redirected to a file (`<gate> <base> > <scratch>/gate.txt 2>&1`)
 and read its `SUMMARY` there, so its exit code is the gate's own. Builds and test runs go
-the same way: to a file, or behind `set -o pipefail` when piped. The full gate is the last
-act of your phase, run once, and once more after each fix of what it found; while working,
+the same way: to a file, or behind `set -o pipefail` when piped. The gate, with the
+options your role's **Done when** names, is the last act of your phase, run once, and once
+more after each fix of what it found; while working,
 run the narrowest test command the repo's knowledge gives (one file, one test). Write your
 part of the step file under your phase's `##` heading, above the next `##` heading.
 
@@ -28,13 +29,23 @@ for your role and for `all`. `CLAUDE.md` is already in your context.
 
 Open items addressed to your phase come first: failures under `## Verification`, or
 findings routed to you in the latest round under `## Review`. When you fix a finding, fill
-in its `Resolved in` cell (for example "Implementation, round 1 fixes").
+in its `Resolved in` cell (for example "Implementation, later round 2").
 
 Navigate with an LSP where the repo has one, Grep and targeted Reads. Read the step file
 in sections (`sections.sh <step file> <heading>...` in this folder), the ones your role
 names. Read what you already know you need in one call: several files in one Bash call, or
 parallel Reads in one message. With a Code map in the step file, the developer writes its
 first test within about five turns.
+
+## Later rounds
+
+You are the step's only agent in your role, and you are resumed for each later round (a
+review round, a failed verification) with its round number, the open items for you and the
+commit the round starts from. What you read before still holds: read what changed since
+(`git diff <that commit>`, the step file sections the message names) rather than the step
+again. Add to your section under `### Later round <n>`: what you did about each open item and a
+Hotwash for the round; what you wrote before stays. A reviewer answers in its message: first
+whether each of its earlier findings is resolved, then new findings in the round's diff.
 
 ## Stop and ask
 

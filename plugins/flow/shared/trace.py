@@ -13,7 +13,8 @@ import re
 import sys
 from datetime import datetime
 
-BASH_WRITE = re.compile(r"(sed -i|\btee\b|\bmv\b|\bcp\b|\brm\b|>>?\s*(?!/dev/null|&)[^\s|&]+)")
+# Redirects to /tmp or $TMPDIR are scratch output (the gate, test runs), not file changes.
+BASH_WRITE = re.compile(r"(sed -i|\btee\b|\bmv\b|\bcp\b|\brm\b|>>?\s*(?!/dev/null|&|/tmp/|\$TMPDIR|\"\$TMPDIR)[^\s|&]+)")
 PIPED_GATE = re.compile(r"\|\s*(tail|head|grep|tee)\b")
 # The gate wrote to a file and its exit code was read before anything was piped.
 EXIT_BEFORE_PIPE = re.compile(r">\s*\S+[^|;]*;\s*echo[^|;]*\$\?")

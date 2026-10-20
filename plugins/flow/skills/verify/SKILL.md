@@ -16,15 +16,18 @@ agent.
    health. If it cannot start, tell the user what is needed; the tester may still run the
    automated tests.
 3. Dispatch `flow:tester` with the step file, `goal.md`, the base commit, the gate command
-   line, the shared folder path, and that the app is running and must be left running.
+   line, the shared folder path, and that the app is running and must be left running. In a
+   later round, resume the step's tester instead (`orchestrating.md`, "One agent per role")
+   with the round number, the criteria to check again and the commit the round starts from.
 4. Handle `QUESTIONS`, `BLOCKED` and `PARTIAL` per `orchestrating.md`. When the user
    supplies a missing fact about running the app, record it for the retro (it belongs in
    the repo's knowledge).
 5. Record the tester's trace line in `## Verification`.
-6. **`PASSED`**: set the status to `Refining`, commit any tests the tester added, report
-   criteria results, findings and observations in a few lines, give the user the exact
-   steps for each `Not run` criterion (they stay open until the user confirms), and call
-   the Skill tool with `flow:refine`.
+6. **`PASSED`**: commit any tests the tester added, report criteria results, findings and
+   observations in a few lines, and give the user the exact steps for each `Not run`
+   criterion (they stay open until the user confirms). Then set the status to `Refining`
+   and call the Skill tool with `flow:refine`; in a later round with no open finding routed
+   to `refine`, set it to `Reviewing` and call `flow:final-review` instead.
 7. **`FAILED`**: present the failures. A failure where the contract itself looks wrong is
    the user's decision; everything else goes back to the developer. Commit the tester's
    tests, set the status to `Implementing`, and call the Skill tool with `flow:implement`.

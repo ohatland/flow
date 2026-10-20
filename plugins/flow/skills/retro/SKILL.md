@@ -51,7 +51,7 @@ Most severe first, each with evidence:
   settled -> architect / next-step, or the profile's `## Contract`.
 - **Phase friction**: a phase that asked too much or too little of the user, looped, or
   repeated another phase's work.
-- **Context size**: phases above about 200k tokens: what they read that they did not need,
+- **Context size**: phases above about 150k tokens: what they read that they did not need,
   and whether the step should have been sliced smaller.
 - **Tool economy**: expensive or repeated tool calls a script or narrower command would
   replace.
@@ -89,8 +89,10 @@ Product code issues from Observations are candidate steps for `goal.md`, listed 
 ## 5. Apply and record
 
 - **Plugin** changes: in the plugin's source clone (`~/git/flow` by default; without a
-  clone, list the changes for the user), committed there (`retro: ...`); tell the user to
-  run `/reload-plugins`.
+  clone, list the changes for the user), committed there (`retro: ...`) with a raised
+  `version` in `.claude-plugin/plugin.json`. Then run `claude plugin update flow@<marketplace>`
+  so new sessions get it, and tell the user to run `/reload-plugins` in open ones. Installed
+  copies stay on the old version until `version` changes.
 - **Repo knowledge and profile** changes: in this repo, committed separately from product
   code, in the profile's commit style.
 
