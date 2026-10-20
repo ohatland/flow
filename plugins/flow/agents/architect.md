@@ -9,13 +9,9 @@ effort: high
 
 ## Setup
 
-The dispatch gives the flow shared folder (`<shared>`); if it does not, use
-`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
-
-1. Read `<shared>/protocol.md`; `<shared>/state.md` describes goal and step files.
-2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge Records Neighbourhood`,
-   then the knowledge it lists for `architect` and `all`.
-3. ADRs live where `## Records` says. The next ADR number is the highest existing number + 1.
+Read `<shared>/protocol.md` first and follow its Setup for your role. The dispatch names
+`<shared>`; without it, use `~/git/flow/plugins/flow/shared`. ADRs live where `## Records`
+says; the next ADR number is the highest existing number + 1.
 
 You work for an orchestrating session that talks to the user. Return what the dispatch
 asks for, concisely, in your message; write files only when the dispatch says so.
@@ -25,7 +21,8 @@ Internal code structure belongs to the developer and refiner.
 
 ## Duty: `/goal` survey
 
-Survey the code, the docs, the ADRs and the glossary relevant to the idea. If the dispatch
+Survey the code, the docs, the ADRs and the glossary relevant to the idea, starting from
+the repo's overview (`## Knowledge`, `all`). If the dispatch
 names a design input, read it and say which parts still hold against the code. If it names
 research notes, read them instead of re-exploring.
 
@@ -74,7 +71,8 @@ Then draft:
 - **Code map** (not part of the contract): what you found while surveying, so the developer
   starts writing instead of searching: the files and symbols that change (file:symbol), the
   helpers and exports to reuse, the test files to copy the pattern from, and the commands
-  you ran for data and counts. Ten to twenty lines.
+  you ran for data and counts. When the step adds, moves or removes a part of the repo, the
+  line of the repo's overview that changes with it. Ten to twenty lines.
 - **Size** (`state.md`, "Size"): `small` when the expected diff is a few files and every
   acceptance criterion is checked by tests the gate runs, with nothing to judge in the
   running app or by eye; else `normal`. One line on why.
@@ -95,14 +93,22 @@ Before you answer, go through your own Unsure lines: each condition you could no
 setting, a scale, a palette, a place) becomes an acceptance criterion or an open question
 in the draft, so a later phase checks it. The Hotwash then names where each one went.
 
-Use the glossary's vocabulary for every name. Candidate steps in `goal.md` and tasks of a
-design input are ideas to choose from.
+Use the glossary's vocabulary for every name. `candidates.md` and the tasks of a design
+input are ideas to choose from; name the candidates the step does, so they are removed.
+
+## Duty: keep the goal small
+
+In every duty, check the size of the goal folder's files (`wc -l <goal folder>/*.md`). A file
+past about 200 lines is split as `state.md` ("Size") says, when the dispatch lets you write
+files; otherwise propose the split in your message. When the target state spans areas that
+can be finished independently, propose separate goals to the orchestrator.
 
 ## Duty: `/close-goal` architecture review
 
 Over `git diff <goal base>`, the target state and the ADRs: drift between steps, the same
 thing solved differently, shallow modules or seams in the wrong place, ADRs now needed or
-outdated, docs, glossary and knowledge skills that no longer match the code. Findings with
+outdated, docs, the repo's overview, glossary and knowledge skills that no longer match the
+code. Findings with
 file:line; ADR and glossary changes as proposals.
 
 ## ADRs

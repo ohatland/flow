@@ -18,10 +18,10 @@ Read `.flow/project.md` once per session. If it is missing, stop and suggest `/f
 
 This is what makes the workflow scale; the role agents carry the heavy context, you do not.
 
-- Give agents **paths** (step file, `goal.md`, the shared folder) and the base commit,
+- Give agents **paths** (the step folder, the goal folder, the shared folder) and the base commit,
   never file contents.
 - Do not read code yourself to check an agent's work beyond `git diff --stat` and the
-  agent's section of the step file. Spot checks are fine; reviewing is the reviewers' job.
+  agent's phase file. Spot checks are fine; reviewing is the reviewers' job.
 - Save long command output (the gate, test runs) to a file under the session scratchpad
   or `$TMPDIR` and read only the summary or failures.
 - Between steps, and whenever the conversation has grown long, suggest `/flow:handoff`,
@@ -38,12 +38,12 @@ ${CLAUDE_PLUGIN_ROOT}/shared/trace.py <agent-id> --out <goal-dir>/traces/<NN>-<p
 ```
 
 (`<agent-id>` from the launch result; for a fix, `<state>/goals/fixes/traces/<fix-slug>-<role>.txt`;
-for reviewers, add the axis to the name.) Record one line at the end of that agent's section
-in the step file: `Trace: peak 85k, 42 calls, 3 errors, 1 failed gate run ->
+for reviewers, add the axis to the name.) Record one line at the end of that agent's phase
+file: `Trace: peak 85k, 42 calls, 3 errors, 1 failed gate run ->
 traces/03-implement-developer.txt`, and when the step is done, the peak context per phase
-in the goal's progress table. Agents without a section in the step file (the architect)
+in the goal's progress table. Agents without a phase file (the architect)
 end their message with their Hotwash: copy it with the trace line under `## Clarifications`
-of the step being planned (next-step), or under `## Agent notes` in `goal.md` (goal,
+of the step being planned (next-step), or under `## Agent notes` in `notes.md` (goal,
 close-goal). Do not judge the trace yourself beyond that line; the reviewers and the retro
 compare it with the hotwash.
 
@@ -59,7 +59,7 @@ step as a whole and your part in it.
 
 ## Dispatch
 
-Start the agent with: its task in one or two sentences, the step file path, the goal path,
+Start the agent with: its task in one or two sentences, the step folder, the goal folder,
 the base commit, the gate command line (with any step-specific options the profile's
 `## Gate` describes, including one approval option for each locked file the contract
 approves), which open items to fix first, the absolute path of this shared folder
@@ -85,7 +85,7 @@ cannot be resumed (after `/clear`, in a new session, or `SendMessage` fails) or 
 shows a peak context above about 150k. Questions to settle facts while planning go to the
 step's architect the same way, not to a new agent.
 
-A round whose open items are only wording (comments, test heads, the step file), with the
+A round whose open items are only wording (comments, test heads, the step's files), with the
 wording settled by the user, is a **narrow round**: the message to the developer says
 `Narrow round` and gives the lines and the new text; you run the gate; its review is `spec`
 only.
@@ -98,12 +98,12 @@ agent in the background to write one dated, cited note to
 `<state>/goals/<goal>/research/<slug>.md` and return its path and a three-line summary.
 Each number in the note stands with the query or command that produced it. It does the
 research itself rather than delegating further. Record the note under
-`## Decisions so far` or `## Not yet specified` in `goal.md` when it settles or opens
+`decisions.md` or `## Not yet specified` in `goal.md` when it settles or opens
 something, and pass its path to later agents.
 
 ## Recording decisions
 
-Every decision the user makes also gets one line under `## Decisions so far` in `goal.md`,
+Every decision the user makes also gets one line in `decisions.md`,
 pointing to where it is recorded in full (step Clarifications, Contract, ADR). Edit goal and
 step files with the Edit tool on an anchor that occurs once, one section at a time.
 

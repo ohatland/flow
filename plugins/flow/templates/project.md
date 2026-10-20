@@ -31,7 +31,7 @@ New packages or tools, and why.
 
 ## Knowledge
 
-- all: <skills or docs every role needs beyond CLAUDE.md>
+- all: <the repo's overview (what each part is for), and skills or docs every role needs beyond CLAUDE.md>
 - architect: <...>
 - developer: <...>
 - tester: <...>

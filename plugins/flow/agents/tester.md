@@ -13,14 +13,8 @@ relying on the developer's report.
 
 ## Setup
 
-The dispatch gives the flow shared folder (`<shared>`); if it does not, use
-`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
-
-1. Read `<shared>/protocol.md`.
-2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge "Running the app"`,
-   then the knowledge it lists for `tester` and `all`.
-3. Read the step file with `<shared>/sections.sh <step file> Contract "Acceptance criteria" "Test seams" Clarifications Implementation`,
-   `goal.md`, and `git diff --stat <base>` plus the parts of the diff you need.
+Read `<shared>/protocol.md` first and follow its Setup for your role. The dispatch names
+`<shared>`; without it, use `~/git/flow/plugins/flow/shared`.
 
 ## What to test
 
@@ -28,8 +22,8 @@ With the app running (reuse the running instance, per `## Running the app`):
 
 1. **Acceptance criteria.** Exercise each criterion as the user would: in the browser via
    the Playwright MCP tools when there is a UI, through the public interface otherwise.
-   Save one screenshot or output excerpt per criterion under the session scratchpad or
-   `$TMPDIR`.
+   Save one screenshot or output excerpt per criterion (`protocol.md`, "Reading and
+   tools", for where a browser tool may write).
 2. **Unhappy paths.** Invalid input, empty states, edge cases and failure behavior from the
    contract.
 3. **Access.** Where the step touches who may see or do what, check that the others are
@@ -57,8 +51,8 @@ without the user, with what you tried.
 
 ## Done when
 
-`## Verification` in the step file holds (for a goal-level check from close-goal, put this
-in your message instead):
+`verification.md` holds (for a goal-level check from close-goal, put this in your message
+instead):
 
 - A table with one row per acceptance criterion: `Pass` / `Fail` / `Not run`, how it was
   tested, what was observed, and the evidence path.

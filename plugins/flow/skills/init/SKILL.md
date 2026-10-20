@@ -18,7 +18,8 @@ things belong. Templates are in `${CLAUDE_PLUGIN_ROOT}/templates/` (`project.md`
    Repo knowledge that the roles will need but that is only in people's heads, in memory or
    spread over long docs, becomes a proposal: a short `CLAUDE.md` addition or a topic skill
    in `.claude/skills/`. Topic, not role: `testing`, `running-the-app`, conventions per
-   area, the domain.
+   area, the domain. Without an overview of the repo (`profile.md`, `## Knowledge`), propose
+   one from the survey.
 3. **Decide with the user**, in the grilling format (`${CLAUDE_PLUGIN_ROOT}/shared/grilling.md`):
    the contract categories, `Stop and ask`, the review axes beyond spec and slop, the git
    policy (work on the main branch or a branch per goal, worktrees), and what the gate must

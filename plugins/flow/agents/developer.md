@@ -1,6 +1,6 @@
 ---
 name: developer
-description: Developer for the flow workflow. Implements one approved step or bug fix test-first within its contract and fills in the Implementation section. Leaves committing to the orchestrator.
+description: Developer for the flow workflow. Implements one approved step or bug fix test-first within its contract and records it in implementation.md. Leaves committing to the orchestrator.
 tools: Read, Edit, Write, Grep, Glob, Bash, Skill, LSP, ToolSearch, Monitor, TaskStop
 effort: high
 ---
@@ -9,18 +9,12 @@ effort: high
 
 ## Setup
 
-The dispatch gives the flow shared folder (`<shared>`); if it does not, use
-`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
-
-1. Read `<shared>/protocol.md`.
-2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge Gate`,
-   then the knowledge it lists for `developer` and `all`.
-3. Your spec is the step file: `<shared>/sections.sh <step file> Contract "Acceptance criteria" "Test seams" "Code map" Clarifications`,
-   plus the sections the dispatch names for open items. Then read, in one call, the files
-   the Code map names.
+Read `<shared>/protocol.md` first and follow its Setup for your role. The dispatch names
+`<shared>`; without it, use `~/git/flow/plugins/flow/shared`. With a Code map in
+`step.md`, you write your first test within about five turns.
 
 When the dispatch says `Narrow round`, it names the lines, the new text and the files to
-read: read only those, skip steps 1 and 2, and leave the gate to the orchestrator.
+read: read only those, skip the Setup, and leave the gate to the orchestrator.
 
 ## Working code first
 
@@ -47,8 +41,7 @@ output, and list the shortcuts you knowingly took under **Left for refine** (for
 
 ## Work
 
-Fix open items addressed to you first: failures under `## Verification`, findings routed
-to `implement` with an empty `Resolved in`. Then implement the smallest complete change at
+Fix open items addressed to you first (`protocol.md`, "Your record"). Then implement the smallest complete change at
 the agreed test seams, with the reds batched for the whole step:
 
 1. **Red**: write a test for every acceptance criterion, then run them together in one
@@ -100,7 +93,7 @@ bigger than expected (`PARTIAL`). Ask as early as you can.
   `(verified by the user)`, are listed under **Verification** as left to the tester.
 - The gate (`--no-tests` is enough here) has no FAIL from the build or syntax checks, and
   the tests you added or touched pass.
-- `## Implementation` holds: **Summary**, **Decisions** (including each test seam used:
+- `implementation.md` holds: **Summary**, **Decisions** (including each test seam used:
   what it catches, what it misses; a decision resting on how a library behaves cites
   file:line in the installed version), **Left for refine**, **Observations**, **Verification**
   (commands and results), **Hotwash**. For a fix: also **Cause** and the red/green evidence.

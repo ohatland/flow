@@ -11,7 +11,7 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
 agent.
 
 1. **Find the step** with status `Refining`.
-2. Dispatch `flow:refiner` with the step file, `goal.md`, the base commit, the gate command
+2. Dispatch `flow:refiner` with the step folder, the goal folder, the base commit, the gate command
    line, open findings routed to `refine`, and the shared folder path; in a later round,
    resume the step's refiner with them instead (`orchestrating.md`, "One agent per role").
 3. On `DONE`: run the gate with output saved to a file and read the summary. A FAIL sends
@@ -20,7 +20,7 @@ agent.
    each file the refiner changed outside the step's files must be listed under
    **Outside the step** with a ring and a tie, and stay out of areas the profile names as
    another owner's. If not, send the refiner back to revert it or record it.
-4. Record the refiner's trace line in `## Refinement`. If the refiner changed nothing, skip
+4. Record the refiner's trace line at the end of `refinement.md`. If the refiner changed nothing, skip
    the commit. Otherwise commit.
 5. Set the status to `Reviewing`, report the restructuring, measurements and observations
    in a few lines, and call the Skill tool with `flow:final-review`.

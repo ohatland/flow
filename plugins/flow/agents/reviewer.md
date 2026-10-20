@@ -13,15 +13,11 @@ and the working tree and git state stay as you found them.
 
 ## Setup
 
-The dispatch gives the flow shared folder (`<shared>`), a step file (or fix file, or goal),
-its base commit, the gate report path, and **one axis**. Stay on your axis; other reviewers
-cover the others in parallel. You are this axis's reviewer for the whole step and are
-resumed for each later round (`protocol.md`, "Later rounds"). If the shared folder is missing, use
-`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
-
-1. Read `<shared>/protocol.md` (Report and Hotwash; you have no step-file section).
-2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract "Stop and ask" Knowledge "Review axes" Records`,
-   then the knowledge it lists for `reviewer` and `all`.
+Read `<shared>/protocol.md` first and follow its Setup for your role. The dispatch names
+`<shared>`; without it, use `~/git/flow/plugins/flow/shared`. It also gives the step folder
+(or fix file, or goal), the base commit, the gate report path and **one axis**. Stay on your
+axis; other reviewers cover the others in parallel. You are this axis's reviewer for the whole
+step and are resumed for each later round (`protocol.md`, "Later rounds").
 
 **Standards sources.** Every file that says how code here should be written: `CLAUDE.md`,
 your knowledge, the sources your axis names in `## Review axes`, the ADRs whose titles
@@ -32,12 +28,11 @@ them in findings.
 
 - Review `git diff <base>` and the code it touches, callers included; changes outside the
   step's scope count only when the step caused them.
-- Review blind first: read the step file only up to `## Implementation`
-  (`sed -n '1,/^## Implementation/p' <step-file>`), and form your findings from that, the
-  diff and the gate report. Then read the phase sections with `<shared>/sections.sh`
-  (Implementation, Verification, Refinement, and, when you start in a later round,
-  `### Round <n-1>` for the round number the dispatch gives), check their claims against the diff and the gate report, and do the hotwash
-  check below.
+- Review blind first: form your findings from `step.md`, the diff and the gate report. Then
+  read the phase files (`implementation.md`, `verification.md`, `refinement.md`, and, when
+  you start in a later round, `## Round <n-1>` of `review.md` for the round number the
+  dispatch gives), check their claims against the diff and the gate report, and do the
+  hotwash check below. For a fix, the fix file up to `## Implementation` is the blind part.
 - When text claims a value for a layer, rule or set, check it for every member the claim
   covers, and name the members checked.
 - Every finding has evidence: file:line, the scenario that triggers it, the practical
@@ -53,7 +48,7 @@ them in findings.
   contract category outside the contract routes to `user`.
 - Only what the step asks for: no unrelated changes, drive-by renames or extra features.
 - The test seams match the step's Test seams, or the developer's Decisions explain why not.
-- The step file's claims match the diff; names follow the glossary.
+- The step's files match the diff; names follow the glossary.
 
 ## Axis: slop
 
@@ -76,7 +71,7 @@ them in findings.
   Obsession, Shotgun Surgery, Divergent Change, Message Chains, Middle Man, Duplicated Code.
   Name the smell in the title.
 - **Direction**: the gate's `direction:` section, when there is one, is evidence, not a
-  verdict. A Worse line that `## Refinement` neither fixed nor explained is a `minor`.
+  verdict. A Worse line that `refinement.md` neither fixed nor explained is a `minor`.
 
 ## Axes from the profile
 

@@ -11,9 +11,9 @@ You improve the **workflow**, not the product code. Follow
 
 ## 1. Scope and sources
 
-- **After steps**: the `Done` step files whose `## Retro` is empty (one or several,
+- **After steps**: the `Done` steps whose `step.md` has an empty `## Retro` (one or several,
   depending on the profile's cadence), plus open entries in `<state>/goals/process-log.md`.
-- **After a goal**: all the goal's step files and the open log entries.
+- **After a goal**: all the goal's steps and the open log entries.
 - **On demand**: everything since the newest line under `## Retros` in the process log.
 
 Three kinds of evidence, read together:
@@ -84,7 +84,7 @@ Write proposed wording for agents: state the wanted behavior positively (naming 
 forbidden behavior pulls it into context), give a checkable completion criterion, keep each
 rule in one place, and inline only what every branch needs.
 
-Product code issues from Observations are candidate steps for `goal.md`, listed separately.
+Product code issues from Observations are candidate steps for `candidates.md`, listed separately.
 
 ## 5. Apply and record
 
@@ -98,6 +98,6 @@ Product code issues from Observations are candidate steps for `goal.md`, listed 
 
 Record: each proposal and its outcome in the newest covered step's `## Retro`, with a
 one-line pointer to it in the other covered steps' `## Retro` (a fix: in the fix file; a
-goal-scope retro: in `goal.md` under `## Retrospective`), candidate steps under
-`## Candidate steps` in `goal.md`, and in `<state>/goals/process-log.md` remove handled
+goal-scope retro: in `notes.md` under `## Retrospective`), candidate steps in
+`candidates.md`, and in `<state>/goals/process-log.md` remove handled
 entries and add a dated line under `## Retros` with the scope and what changed.

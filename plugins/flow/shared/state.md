@@ -5,22 +5,43 @@ from the profile's `## Records` (default `.agent-work/`). It is gitignored: noth
 committed; code is. With worktrees, `<state>` is shared by all of them (a symlink), so every
 worktree sees the same goals.
 
+Every agent reads these files, and what it reads early is sent again with every later turn.
+So the state is split into small files, each read whole by the roles that need it.
+
 ```text
 <state>/goals/<goal-slug>/
-  goal.md                 current state, target state, success criteria, progress
-  steps/<NN>-<slug>.md    one increment: task, approved contract, acceptance criteria,
-                          and the record of every phase
-  research/<slug>.md      dated, cited notes from research or exploration agents; agents
-                          get them by path instead of exploring again
+  goal.md                 where we are going: status, current and target state, success
+                          criteria, out of scope, fog, direction, parts, progress
+  decisions.md            one line per user decision, with a pointer
+  candidates.md           ideas for later steps
+  notes.md                the architect's hotwash and trace lines, the goal retrospective
+  steps/<NN>-<slug>/
+    step.md               the plan: task, approved contract, criteria, neighbours, seams,
+                          code map, clarifications, agents, the orchestrator's hotwash, retro
+    implementation.md     the developer's record (one file per phase, written by that phase)
+    verification.md       the tester's record
+    refinement.md         the refiner's record
+    review.md             the review rounds, recorded by the orchestrator
+  research/<slug>.md      dated, cited notes; agents get them by path instead of exploring
   traces/<NN>-<phase>-<role>.txt   observed tool calls per agent, from shared/trace.py
   handoff.md              orchestrator handoff between sessions (deleted on resume)
-<state>/goals/fixes/<YYYY-MM-DD>-<slug>.md   bug fixes outside a goal
+<state>/goals/fixes/<YYYY-MM-DD>-<slug>.md   bug fixes and chores outside a goal
 <state>/goals/fixes/traces/<slug>-<role>.txt  traces of fix agents
 <state>/goals/process-log.md                  workflow friction for the next retro
 ```
 
 Write these files in the language the profile's `## Project` names; keep the headings below
 as they are, since skills and agents find sections by them.
+
+## Size
+
+Each file stays under about 200 lines. When one grows past that, the architect splits it in
+its next duty, by topic, into `<file>-<topic>.md` next to it (`decisions-symbols.md`,
+`candidates-data.md`), and lists each part with one line under `## Parts` in `goal.md`; agents
+then read only the parts their task touches. When `goal.md` itself outgrows that, because its
+target state spans areas that can be finished independently, the architect proposes to the
+user to split the goal into separate goals. A `step.md` past about 200 lines means the step is
+too big: the architect slices the next steps smaller.
 
 ## goal.md
 
@@ -51,10 +72,6 @@ as they are, since skills and agents find sections by them.
 
 - <What this goal deliberately does not do. Closed: these never become steps.>
 
-## Decisions so far
-
-- <One line per decision, with a pointer: step file, ADR or research note.>
-
 ## Not yet specified
 
 - <Fog: questions that cannot be stated precisely yet. Later steps and research turn them
@@ -64,32 +81,29 @@ as they are, since skills and agents find sections by them.
 
 <Approved direction for each contract category. Links to relevant ADRs and glossary terms.>
 
-## Candidate steps
+## Parts
 
-<Optional. Ideas for later steps, from the design input, retros or observations. Not a plan:
-/next-step picks one at a time and may ignore or reorder these.>
+- decisions.md, candidates.md, notes.md <and each split part, one line on what it holds>
 
 ## Progress
 
 | Step | Result | Direction | Learned | Peak context (impl/verify/refine/review) |
 |---|---|---|---|---|
-
-## Agent notes
-
-<Hotwash and trace line of the architect from /goal and /close-goal.>
-
-## Retrospective
-
-<Written by /close-goal: what was learned, what changed in the workflow, peak context per
-phase.>
 ```
 
-## steps/<NN>-<slug>.md
+`decisions.md` is `# Decisions` and one line per decision (`- <date> <decision> -> <step
+Clarifications, Contract, ADR or research note>`). `candidates.md` is `# Candidate steps`:
+ideas from the design input, retros or observations, not a plan; `/next-step` picks one at a
+time and removes what a step has done. `notes.md` has `## Agent notes` (the architect's hotwash
+and trace line from `/goal` and `/close-goal`) and `## Retrospective` (written by
+`/close-goal`).
+
+## steps/<NN>-<slug>/step.md
 
 ```markdown
 # Step <NN>: <title>
 
-- Goal: [<goal title>](../goal.md)
+- Goal: [<goal title>](../../goal.md)
 - Status: Planned
 - Size: normal
 - Base commit: <hash of HEAD when the contract was approved>
@@ -115,15 +129,15 @@ profile's `## Stop and ask`. Word criteria about existing tests as "no assertion
 value changed in tests committed before the step's base commit", so refine can restructure
 tests and the step can adjust its own new tests.>
 
-## Test seams
-
-<Not part of the contract; accepted by default. The highest seams to test at, ideally one,
-each with what it catches and what it misses.>
-
 ## Neighbours
 
 <Not part of the contract. From the architect: each neighbour (profile `## Neighbourhood`) of
 what the contract changes, *changes* or *stays*, with one line why.>
+
+## Test seams
+
+<Not part of the contract; accepted by default. The highest seams to test at, ideally one,
+each with what it catches and what it misses.>
 
 ## Code map
 
@@ -133,14 +147,6 @@ reuse, test files to copy the pattern from, commands for data and counts.>
 ## Clarifications
 
 <Questions raised by phase agents and the user's answers, with dates.>
-
-## Implementation
-
-## Verification
-
-## Refinement
-
-## Review
 
 ## Agents
 
@@ -152,7 +158,13 @@ reuse, test files to copy the pattern from, commands for data and counts.>
 ## Retro
 ```
 
+The phase files start with `# <Phase>: step <NN>` and hold what that role's **Done when**
+names, ending with its trace line; later rounds add `## Later round <n>`. `review.md` has one
+`## Round <n>` per review round.
+
 ## fixes/<YYYY-MM-DD>-<slug>.md
+
+A fix is small enough for one file.
 
 ```markdown
 # Fix: <title>
@@ -215,5 +227,6 @@ with the contract.
 
 ## Finding a step
 
-The step file given, or else the highest-numbered step with the phase's status in the given
-goal, or in the only goal with `Status: Active`. Several active goals: ask which one.
+The step folder given, or else the highest-numbered step whose `step.md` has the phase's
+status in the given goal, or in the only goal with `Status: Active`. Several active goals: ask
+which one.

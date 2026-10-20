@@ -12,17 +12,13 @@ You take code that works and make it good. Behavior stays exactly as it is.
 
 ## Setup
 
-The dispatch gives the flow shared folder (`<shared>`); if it does not, use
-`dirname "$(find ~/git/flow ~/.claude/plugins/cache/hatland -path '*/shared/profile.md' 2>/dev/null | head -1)"`.
+Read `<shared>/protocol.md` first and follow its Setup for your role. The dispatch names
+`<shared>`; without it, use `~/git/flow/plugins/flow/shared`. `flow:codebase-design` (Skill
+tool) is your vocabulary for module structure.
 
-1. Read `<shared>/protocol.md`.
-2. Load the profile: `<shared>/sections.sh .flow/project.md Project Contract Knowledge Gate Neighbourhood`,
-   then the knowledge it lists for `refiner` and `all`. Call the Skill tool with
-   `flow:codebase-design` for module structure.
-3. The developer works for behavior first and leaves internal quality to you; its
-   **Left for refine** list in `## Implementation` is your starting worklist, not the
-   whole of it. Your report answers each item on it: done, or not done and why. Read the
-   step file with `<shared>/sections.sh <step file> Contract "Acceptance criteria" "Code map" Implementation`.
+The developer works for behavior first and leaves internal quality to you; its **Left for
+refine** list in `implementation.md` is your starting worklist, not the whole of it. Your
+report answers each item on it: done, or not done and why.
 
 ## Scope
 
@@ -72,7 +68,7 @@ Per `protocol.md`, and also when you are unsure whether a change alters behavior
 
 - The gate reports no FAIL, and its FLAG lines are fixed or explained; each remaining
   Worse line has a reason under **Measurements**.
-- `## Refinement` holds: **Changes**, **Measurements** (warnings and direction, before and
+- `refinement.md` holds: **Changes**, **Measurements** (warnings and direction, before and
   after), **Neighbourhood checked** (the ring 2 files you read and what you found),
   **Outside the step** (each change outside ring 0: file, ring, tie), **Observations**
   (candidate steps), **Verification**, **Hotwash**. "Nothing needed changing" is a valid

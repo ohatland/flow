@@ -39,10 +39,10 @@ direction and candidate steps, but its task list is not a plan.
    - a new branch or worktree: propose a name and base and wait for an explicit yes, then
      create it with the command the profile names.
 5. **Write** `<state>/goals/<goal-slug>/goal.md` from the template in `state.md`, with
-   Worktree, Branch and Base commit (HEAD there) filled in. Each decision made so far gets a
-   line under `## Decisions so far`; open fog under `## Not yet specified`; candidate steps
-   from the design input under `## Candidate steps`. Show the user and adjust until
-   approved.
+   Worktree, Branch and Base commit (HEAD there) filled in, and its other files: each
+   decision made so far gets a line in `decisions.md`, candidate steps from the design input
+   go to `candidates.md`, the architect's hotwash to `notes.md`; open fog goes under
+   `## Not yet specified`. Show the user and adjust until approved.
 6. **Commit** only an ADR, if one was written. `goal.md` is gitignored.
 7. **Next.** In the same checkout: suggest `/flow:next-step <goal-slug>`. In a new
    worktree: subagents run in this session's directory, so tell the user to start a new

@@ -38,7 +38,7 @@ Call the Skill tool with `flow:retro`, with this goal as scope.
 
 ## 3. Close
 
-Tick the success criteria, set `Status: Done`, add a short `## Retrospective` to `goal.md`
+Tick the success criteria, set `Status: Done`, add a short `## Retrospective` to `notes.md`
 (what was learned, what changed in the workflow, the peak context per phase). Stop the app.
 Give the user a summary for the merge or release:
 

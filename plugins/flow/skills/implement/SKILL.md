@@ -15,13 +15,13 @@ agent.
    the goal's worktree and branch.
 2. Set the status to `Implementing`. In a later round, resume the step's developer
    (`orchestrating.md`, "One agent per role") with the round number, the open items and the
-   commit the round starts from. Otherwise dispatch `flow:developer` with the step file,
-   `goal.md`, the base commit, the gate command line, open items to fix first
+   commit the round starts from. Otherwise dispatch `flow:developer` with the step folder,
+   the goal folder, the base commit, the gate command line, open items to fix first
    (Verification failures, review findings routed to `implement` with an empty
    `Resolved in`), the step's Size, and the shared folder path.
 3. Handle `QUESTIONS`, `BLOCKED` and `PARTIAL` per `orchestrating.md`.
 4. On `DONE`: look at `git status --short` and `git diff --stat`, and the agent's
-   `## Implementation` section only. Record its trace line there (`orchestrating.md`). If
+   `implementation.md` only. Record its trace line there (`orchestrating.md`). If
    the change needs an action under the profile's `## Stop and ask` to take effect, tell
    the user; it is their call.
    When the developer's Unsure or observations name a reading of the contract that is

@@ -59,6 +59,11 @@ docs (paths) or `sections.sh` commands into existing files. One line per role
 (`architect`, `developer`, `tester`, `refiner`, `reviewer`) plus `all` for what every role
 needs beyond `CLAUDE.md`.
 
+`all` names the repo's **overview**: one short file that says what each part of the repo is
+for (each folder, and the files of a folder that holds several kinds), so agents find their
+way there instead of exploring the code. It is repo knowledge, useful without the flow, and a
+step that adds, moves or removes a part changes its line.
+
 ### `## Gate`
 
 The command, its options and what it checks. Contract: run from the repo root as
