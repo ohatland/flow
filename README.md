@@ -1,8 +1,9 @@
 # flow
 
 A Claude Code plugin for an orchestrator-style workflow in any repo: one session talks to
-you and dispatches role agents in their own context windows, work is done in small steps
-whose contract you approve, and a retro every few steps improves the setup.
+you and dispatches role agents in their own context windows, each step is planned as a whole
+and implemented in small bits whose diff you read before it is committed, and a retro every
+few steps improves the setup.
 
 The plugin knows the **process**. Each repo describes **itself** in a small profile,
 `.flow/`, and keeps its knowledge (conventions, testing, how to run it) in `CLAUDE.md`,
@@ -16,8 +17,10 @@ Grown out of the AdmMit-AI-Flow plugin and
 ```text
 /flow:init        once per repo: survey it and write .flow/ with you
 /flow:goal        current state, target state, success criteria (architect)
-/flow:next-step   one small step, contract + acceptance criteria approved by you
-  implement -> verify -> refine -> final-review   (chained; retro when due)
+/flow:next-step   one step planned as a whole: contract, criteria and 3-8 bits approved by you
+  implement, bit by bit: developer -> spec check -> you read the diff -> commit
+  verify (only when a criterion is left for the tester) -> refine -> final-review
+  (chained; minors in one cleanup bit; retro when due; handoff + /clear after each step)
 /flow:close-goal  whole-goal check, docs and glossary sweep, goal retro
 /flow:fix         lighter loop for a bug outside a goal
 /flow:handoff, /clear, /flow:resume            between steps
@@ -25,14 +28,15 @@ Grown out of the AdmMit-AI-Flow plugin and
 
 | Agent | Role |
 |---|---|
-| `flow:architect` | survey, step proposal with contract draft and test seams, goal review, ADRs after approval |
-| `flow:developer` | working code first, test-first; never commits |
+| `flow:architect` | survey, step plan with contract draft, bits and test seams, adjusts the plan, goal review, ADRs after approval (effort xhigh) |
+| `flow:developer` | one bit at a time, test-first; never commits |
 | `flow:tester` | the running app or real output, against the acceptance criteria; changes only tests |
 | `flow:refiner` | internal quality without behavior change, ring-scoped around the diff |
 | `flow:reviewer` | read-only, one axis per instance: `spec`, `slop`, the profile's axes, `fix`, `goal` |
 
-A step has one agent per role, and one reviewer per axis. Later rounds resume the same agent
-with `SendMessage`; a new one starts only after `/clear` or above about 150k context.
+A step has one agent per role, and one reviewer per axis. Later bits and rounds resume the
+same agent with `SendMessage`; a new one starts only after `/clear` or above about 200k
+context. The architect runs at effort `xhigh`, the other roles at `medium`.
 
 Knowledge skills shipped with the plugin: `flow:codebase-design`, `flow:testing`.
 

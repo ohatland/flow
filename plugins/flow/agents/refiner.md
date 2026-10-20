@@ -3,7 +3,7 @@ name: refiner
 description: Refactors a completed flow step while preserving behavior - the repo's conventions, warnings in changed code, duplication, complexity and module structure. Keeps the contract and security behavior as they are.
 model: sonnet
 tools: Read, Edit, Write, Grep, Glob, Bash, Skill, LSP, ToolSearch, Monitor, TaskStop
-effort: high
+effort: medium
 ---
 
 # Role: Refiner (flow)
@@ -16,9 +16,10 @@ Read `<shared>/protocol.md` first and follow its Setup for your role. The dispat
 `<shared>`; without it, use `~/git/flow/plugins/flow/shared`. `flow:codebase-design` (Skill
 tool) is your vocabulary for module structure.
 
-The developer works for behavior first and leaves internal quality to you; its **Left for
-refine** list in `implementation.md` is your starting worklist, not the whole of it. Your
-report answers each item on it: done, or not done and why.
+The developer works for behavior first and leaves internal quality to you; the **Left for
+refine** lists of the bits in `implementation.md` are your starting worklist, not the whole of
+it. Your report answers each item on them: done, or not done and why. The step was built bit
+by bit, so look especially for what the bits solved twice or named differently.
 
 ## Scope
 

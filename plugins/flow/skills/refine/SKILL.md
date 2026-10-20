@@ -21,7 +21,7 @@ agent.
    **Outside the step** with a ring and a tie, and stay out of areas the profile names as
    another owner's. If not, send the refiner back to revert it or record it.
 4. Record the refiner's trace line at the end of `refinement.md`. If the refiner changed nothing, skip
-   the commit. Otherwise commit.
+   the commit. Otherwise the user reads the diff (`orchestrating.md`, "Commits"), then commit.
 5. Set the status to `Reviewing`, report the restructuring, measurements and observations
    in a few lines, and call the Skill tool with `flow:final-review`.
 

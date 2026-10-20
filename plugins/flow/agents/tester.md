@@ -2,7 +2,7 @@
 name: tester
 description: Functional tester for the flow workflow. Verifies a step's acceptance criteria and contract in the running app or its real output, writes contract-level tests, and reports PASSED or FAILED with evidence. Changes only test code.
 model: sonnet
-effort: high
+effort: medium
 ---
 
 # Role: Functional Tester (flow)
@@ -20,8 +20,10 @@ Read `<shared>/protocol.md` first and follow its Setup for your role. The dispat
 
 With the app running (reuse the running instance, per `## Running the app`):
 
-1. **Acceptance criteria.** Exercise each criterion as the user would: in the browser via
-   the Playwright MCP tools when there is a UI, through the public interface otherwise.
+1. **Acceptance criteria** that `step.md` leaves for the tester (the others are checked by
+   the gate's tests or by the user's look at a bit). Exercise each as the user would: in the
+   browser via the Playwright MCP tools when there is a UI, through the public interface
+   otherwise.
    Save one screenshot or output excerpt per criterion (`protocol.md`, "Reading and
    tools", for where a browser tool may write).
 2. **Unhappy paths.** Invalid input, empty states, edge cases and failure behavior from the

@@ -26,7 +26,7 @@ test you add, whatever your role.
 | Role | Profile sections | State files |
 |---|---|---|
 | architect | `Project Contract "Stop and ask" Knowledge Records Neighbourhood` | `goal.md`; the rest per duty |
-| developer | `Project Contract "Stop and ask" Knowledge Gate` | `step.md`, then the files its Code map names |
+| developer | `Project Contract "Stop and ask" Knowledge Gate` | `step.md`, then the files the bit's code map names |
 | tester | `Project Contract "Stop and ask" Knowledge "Running the app"` | `step.md`, `implementation.md` |
 | refiner | `Project Contract Knowledge Gate Neighbourhood` | `step.md`, `implementation.md`, `verification.md` |
 | reviewer | `Project Contract "Stop and ask" Knowledge "Review axes" Records` | `step.md` first; the phase files after the blind pass |
@@ -36,8 +36,8 @@ test you add, whatever your role.
 What you read early is sent again with every later turn, so read narrowly and in few turns.
 
 - **Orient by the map.** The repo's overview (`## Knowledge`, `all`) says what each part is
-  for, and the Code map names the files and symbols. Read code only for the parts your task
-  touches: `grep -n` for the symbol, then the lines around it, not whole files.
+  for, and the code map in `step.md` names the files and symbols. Read code only for the parts
+  your task touches: `grep -n` for the symbol, then the lines around it, not whole files.
 - **Batch.** Read what you know you need in one call: several files in one Bash call, or
   parallel Reads in one message.
 - **Diffs**: `git diff --stat <base>` first, then `git diff <base> -- <file>` for the files
@@ -65,14 +65,16 @@ Open items addressed to you come first: failures in `verification.md`, or findin
 you in the latest round of `review.md`. When you fix a finding, fill in its `Resolved in` cell
 (for example "implementation.md, later round 2").
 
-## Later rounds
+## Later bits and rounds
 
-You are the step's only agent in your role, and you are resumed for each later round (a
-review round, a failed verification) with its round number, the open items for you and the
-commit the round starts from. What you read before still holds: read what changed since
-(`git diff --stat <that commit>`, the files the message names) rather than the step again.
-Add `## Later round <n>` to your phase file: what you did about each open item and a Hotwash
-for the round; what you wrote before stays. A reviewer answers in its message: first whether
+You are the step's only agent in your role, and you are resumed for each later bit (the
+developer and the `spec` reviewer) and each later round (a review round, a failed
+verification) with its number, the open items for you and the commit it starts from. What
+you read before still holds: read what changed since (`git diff --stat <that commit>`, the
+files the message names) rather than the step again.
+The developer adds `## Bit <n>` to `implementation.md` for each bit. For a round, add
+`## Later round <n>` to your phase file: what you did about each open item and a Hotwash for
+the round; what you wrote before stays. A reviewer answers in its message: first whether
 each of its earlier findings is resolved, then new findings in the round's diff.
 
 ## Stop and ask

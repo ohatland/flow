@@ -16,12 +16,13 @@ So the state is split into small files, each read whole by the roles that need i
   candidates.md           ideas for later steps
   notes.md                the architect's hotwash and trace lines, the goal retrospective
   steps/<NN>-<slug>/
-    step.md               the plan: task, approved contract, criteria, neighbours, seams,
-                          code map, clarifications, agents, the orchestrator's hotwash, retro
-    implementation.md     the developer's record (one file per phase, written by that phase)
+    step.md               the plan: task, approved contract, criteria, bits with their code
+                          map, neighbours, seams, clarifications, agents, hotwash, retro
+    implementation.md     the developer's record, one section per bit (one file per phase,
+                          written by that phase)
     verification.md       the tester's record
     refinement.md         the refiner's record
-    review.md             the review rounds, recorded by the orchestrator
+    review.md             the bit checks and review rounds, recorded by the orchestrator
   research/<slug>.md      dated, cited notes; agents get them by path instead of exploring
   traces/<NN>-<phase>-<role>.txt   observed tool calls per agent, from shared/trace.py
   handoff.md              orchestrator handoff between sessions (deleted on resume)
@@ -41,7 +42,7 @@ its next duty, by topic, into `<file>-<topic>.md` next to it (`decisions-symbols
 then read only the parts their task touches. When `goal.md` itself outgrows that, because its
 target state spans areas that can be finished independently, the architect proposes to the
 user to split the goal into separate goals. A `step.md` past about 200 lines means the step is
-too big: the architect slices the next steps smaller.
+too big: the architect plans it as two steps.
 
 ## goal.md
 
@@ -105,7 +106,7 @@ and trace line from `/goal` and `/close-goal`) and `## Retrospective` (written b
 
 - Goal: [<goal title>](../../goal.md)
 - Status: Planned
-- Size: normal
+- Verify: <yes | no> - <one line why>
 - Base commit: <hash of HEAD when the contract was approved>
 
 ## Task
@@ -129,6 +130,19 @@ profile's `## Stop and ask`. Word criteria about existing tests as "no assertion
 value changed in tests committed before the step's base commit", so refine can restructure
 tests and the step can adjust its own new tests.>
 
+## Bits
+
+<Part of the approved plan. 3-8 bits, each one commit; the orchestrator fills in Status.>
+
+### Bit 1: <title>
+
+- What: <the one change>
+- Criteria: <numbers>
+- User looks: <yes | no>
+- Code map: <file:symbol that changes, helpers to reuse, the test file to copy the pattern
+  from, commands for data and counts>
+- Status: planned
+
 ## Neighbours
 
 <Not part of the contract. From the architect: each neighbour (profile `## Neighbourhood`) of
@@ -138,11 +152,6 @@ what the contract changes, *changes* or *stays*, with one line why.>
 
 <Not part of the contract; accepted by default. The highest seams to test at, ideally one,
 each with what it catches and what it misses.>
-
-## Code map
-
-<Not part of the contract. From the architect: files and symbols that change, helpers to
-reuse, test files to copy the pattern from, commands for data and counts.>
 
 ## Clarifications
 
@@ -159,8 +168,10 @@ reuse, test files to copy the pattern from, commands for data and counts.>
 ```
 
 The phase files start with `# <Phase>: step <NN>` and hold what that role's **Done when**
-names, ending with its trace line; later rounds add `## Later round <n>`. `review.md` has one
-`## Round <n>` per review round.
+names, ending with its trace line; `implementation.md` has `## Bit <n>` per bit, and later
+rounds add `## Later round <n>`. `review.md` has `## Bit <n>` per bit check and one
+`## Round <n>` per review round. A bit's Status is `planned`, `done <commit>` or `dropped`
+(with why).
 
 ## fixes/<YYYY-MM-DD>-<slug>.md
 
@@ -213,17 +224,17 @@ merged changes.
 
 ## Status values
 
-`Planned` -> `Implementing` -> `Verifying` -> `Refining` -> `Reviewing` -> `Done`, and back
-when a phase sends work back.
+`Planned` -> `Implementing` (bit by bit) -> `Verifying` (only with `Verify: yes`) ->
+`Refining` -> `Reviewing` -> `Done`, and back when a phase sends work back.
 
-## Size
+## Bits
 
-`Size: normal` runs every phase. `Size: small` is for a step whose expected diff is a few files
-and whose every acceptance criterion is checked by tests the gate runs, with nothing to judge in
-the running app or by eye: it goes `Implementing` -> `Reviewing`, the developer brings its own
-diff to the conventions (no refine), and the final review runs `spec` and the profile axes whose
-`Applies when:` paths the diff touches. The architect proposes the size; the user approves it
-with the contract.
+The step is planned as a whole and implemented in bits. Each bit is one change, checked by the
+`spec` reviewer and read by the user before it is committed, so the user sees and owns every
+commit. Verify, refine and the review on every axis then run once over the whole step. Fixes
+from a review round are bits too (`R<round>`), and the minors the user wants fixed go in one
+cleanup bit. The architect proposes the bits and `Verify:`; the user approves them with the
+contract.
 
 ## Finding a step
 

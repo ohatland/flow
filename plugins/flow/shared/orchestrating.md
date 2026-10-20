@@ -24,8 +24,10 @@ This is what makes the workflow scale; the role agents carry the heavy context, 
   agent's phase file. Spot checks are fine; reviewing is the reviewers' job.
 - Save long command output (the gate, test runs) to a file under the session scratchpad
   or `$TMPDIR` and read only the summary or failures.
-- Between steps, and whenever the conversation has grown long, suggest `/flow:handoff`,
-  then `/clear`, then `/flow:resume`.
+- One step per session: when a step is `Done`, write the handoff yourself (Skill tool,
+  `flow:handoff`) and ask the user to run `/clear` and then `/flow:resume` before the next
+  step. Within a step, suggest the same when the conversation has grown long; the bits and
+  phases continue from the step files.
 
 ## Trace every agent
 
@@ -47,7 +49,7 @@ of the step being planned (next-step), or under `## Agent notes` in `notes.md` (
 close-goal). Do not judge the trace yourself beyond that line; the reviewers and the retro
 compare it with the hotwash.
 
-A phase with peak context above about 150k means the step was too big: note it for the
+A phase with peak context above about 200k means the step was too big: note it for the
 retro, and slice the next steps smaller rather than raising effort.
 
 ## Your own hotwash
@@ -73,22 +75,18 @@ to ignore changes outside the step's scope.
 ## One agent per role
 
 A step has one agent per role: one architect, one developer, one tester, one refiner and one
-reviewer per review axis. The first time a role is needed in the step, start it with the full
-dispatch above and record its ID under `## Agents` in the step or fix file (`developer: <id>`,
-`reviewer spec: <id>`). Every later round resumes that same agent with `SendMessage` (load the
-tool first if the session lists it as deferred): the round number, the open items addressed
-to it, the commit the round starts from, and the gate command line if it changed. It already
-knows the step, so the message is short.
+reviewer per review axis. The developer and the `spec` reviewer carry the step's bits, and the
+architect is resumed when a bit changes the plan. The first time a role is needed in the step,
+start it with the full dispatch above and record its ID under `## Agents` in the step or fix
+file (`developer: <id>`, `reviewer spec: <id>`). Every later bit or round resumes that same
+agent with `SendMessage` (load the tool first if the session lists it as deferred): the bit's
+or round's number, the open items addressed to it, the commit it starts from, and the gate
+command line if it changed. It already knows the step, so the message is short.
 
 Start a new agent of the role, and replace its line under `## Agents`, only when the old one
 cannot be resumed (after `/clear`, in a new session, or `SendMessage` fails) or its last trace
-shows a peak context above about 150k. Questions to settle facts while planning go to the
+shows a peak context above about 200k. Questions to settle facts while planning go to the
 step's architect the same way, not to a new agent.
-
-A round whose open items are only wording (comments, test heads, the step's files), with the
-wording settled by the user, is a **narrow round**: the message to the developer says
-`Narrow round` and gives the lines and the new text; you run the gate; its review is `spec`
-only.
 
 ## Research
 
@@ -135,15 +133,28 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
 
 When an agent returns `PARTIAL`, record its proposal, then either resume the same agent for
 the remainder (default when the remainder is clearly inside the contract; a new agent per
-"One agent per role" when its context is above about 150k) or, if the remainder is large,
+"One agent per role" when its context is above about 200k) or, if the remainder is large,
 propose to the user to end the step at a coherent point and plan the rest with
 `/flow:next-step`.
 
 ## Commits
 
-The user has given standing permission for this workflow to commit after each phase, on the
-branch the profile's `## Git` allows. Never push, never amend or rebase, never commit on a
-branch the profile protects.
+The user reads every change before it is committed, so the code stays theirs. Before each
+commit (a bit, the tester's tests, the refiner's changes, a fix), leave the change uncommitted
+and show the user:
+
+- `git diff --stat`, and one line per file on what changed and why (from the agent's record);
+- the full diff saved to a file under the session scratchpad, as a full path on its own line
+  (the user may also read it in their editor; show it in the chat when they ask);
+- the `spec` bit check's result, and for a bit with `User looks: yes` the before and after
+  URLs, one per line.
+
+Then wait. "ok" (or "ja", "commit") approves this commit. A comment goes back to the agent that
+made the change (same agent, `SendMessage`), and the new diff is shown again. A comment that
+changes the contract or the criteria is a question for the user and the architect first.
+
+After approval, commit on the branch the profile's `## Git` allows. Never push, never amend or
+rebase, never commit on a branch the profile protects.
 
 - Commit only the agent's changes for the step, in the profile's commit message style.
 - `<state>` is gitignored; goal and step files are not committed.
@@ -155,9 +166,9 @@ branch the profile protects.
 - Update the status, commit, and give the user a short report (a few lines).
 - Then start the next phase yourself by calling the Skill tool with the next skill
   (`flow:verify`, `flow:refine`, `flow:final-review`, `flow:retro`):
-  implement -> verify -> refine -> final-review run as a chain without asking between
-  them; a step with `Size: small` (`state.md`) goes implement -> final-review, and a
-  review round's fixes take the shortest path back (`flow:implement`, step 5). The retro
+  implement (bit by bit) -> verify (only with `Verify: yes`) -> refine -> final-review run as
+  a chain; you stop only for the user's reading before each commit and their decisions, and
+  a review round's fixes take the shortest path back (`flow:implement`). The retro
   is **due** when the `Done` steps whose `## Retro` is empty reach the cadence in the
   profile's `## Records` (`Retro:`, default 3); it also runs at close-goal and on demand. Stop only for decisions that
   are the user's. `/flow:goal`, `/flow:next-step` and `/flow:close-goal` stay user-invoked.

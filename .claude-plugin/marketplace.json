@@ -8,7 +8,7 @@
     {
       "name": "flow",
       "source": "./plugins/flow",
-      "description": "Orchestrated goal/step workflow with role subagents and small approved steps, for any stack. Each repo describes itself in a .flow/ profile."
+      "description": "Orchestrated goal/step workflow with role subagents, steps planned as a whole and small bits you read before each commit, for any stack. Each repo describes itself in a .flow/ profile."
     }
   ]
 }

@@ -24,9 +24,9 @@ they say:
 - **Focus**: what the next session does.
 - **State**: goal, step and status, worktree and branch, latest commits, uncommitted
   changes, whether the app is running (and its PID if you started it).
-- **Process position**: phase in progress and the next command. Phase agents do not
-  survive `/clear`; name any that were mid-phase, so the successor restarts from the step
-  file.
+- **Process position**: phase and bit in progress (and whether a bit waits uncommitted for
+  the user to read it) and the next command. Phase agents do not survive `/clear`; name any
+  that were mid-phase, so the successor restarts from the step file.
 - **Open threads**: questions waiting for the user, missing approvals, promised follow-ups.
 - **Decisions not yet recorded elsewhere**: ideally none.
 - **Read first**: the few files the next session needs, in order.

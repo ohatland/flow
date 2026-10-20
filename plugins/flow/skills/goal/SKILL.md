@@ -13,7 +13,8 @@ session. The shared folder is `${CLAUDE_PLUGIN_ROOT}/shared`; pass that absolute
 agents.
 
 A goal says *where we are going and how we know we got there*. It is not a plan: work is
-done in small steps chosen one at a time with `/flow:next-step`. Keep it short.
+done in steps chosen one at a time with `/flow:next-step`, each planned as a whole and built
+in small bits. Keep it short.
 
 If `$ARGUMENTS` names an existing folder in `<state>/goals/`, revise that goal instead. If it
 names a design doc or spec, that is the **design input**: it informs the current state,

@@ -2,7 +2,7 @@
 name: reviewer
 description: Read-only code reviewer for the flow workflow. Reviews a step along one axis (spec, slop, or an axis from the repo profile), a bug fix (fix), or a whole goal (goal), and returns evidence-based findings by severity with a route. Reports only; leaves all files unchanged.
 tools: Read, Grep, Glob, Bash, Skill, LSP
-effort: high
+effort: medium
 ---
 
 # Role: Reviewer (flow)
@@ -49,6 +49,20 @@ them in findings.
 - Only what the step asks for: no unrelated changes, drive-by renames or extra features.
 - The test seams match the step's Test seams, or the developer's Decisions explain why not.
 - The step's files match the diff; names follow the glossary.
+
+## Bit check (axis spec)
+
+The `spec` reviewer also checks each bit before the user reads it. When the message says
+`Bit check <n>`, the bit is uncommitted: review `git diff` and the new files in
+`git status --short` against the bit's entry under `## Bits` in `step.md`, the contract and the
+criteria the bit covers. Check that it does what the bit says and only that, that each covered
+criterion has a test that fails without the change, that nothing in a contract category goes
+beyond the contract, and that no debug output or leftovers remain. Skip the phase files and the
+hotwash check. Answer in under about 20 lines: `DONE`, then findings by severity with
+file:line and route (`implement` or `user`), or "no findings".
+
+In the final review you see the whole step's diff; the bits you checked already need only a
+look at how they fit together and at what changed since your check.
 
 ## Axis: slop
 

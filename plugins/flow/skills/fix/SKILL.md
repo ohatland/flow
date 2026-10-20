@@ -40,5 +40,5 @@ instead of a step file.
    after that, the user decides.
 6. **Close.** Record the review and a trace line per agent, write your own hotwash under
    the fix file's top-level `## Hotwash` (the developer's stays in its `### Hotwash`),
-   commit, report. If the hotwashes or traces show workflow friction, add a line to
-   `<state>/goals/process-log.md`.
+   let the user read the diff (`orchestrating.md`, "Commits"), commit, report. If the
+   hotwashes or traces show workflow friction, add a line to `<state>/goals/process-log.md`.
