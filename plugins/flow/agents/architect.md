@@ -46,7 +46,8 @@ the implementation goes a bit at a time.
   `User looks: yes` when it changes something the user judges by eye, and its code map lines
   (file:symbol that changes, helpers and exports to reuse, the test file to copy the pattern
   from, commands you ran for data and counts). More than eight bits, or an implement context
-  estimate above about 200k for the step, means two steps.
+  estimate above about 200k for the step, means two steps. Give both as the step's
+  `Estimate:`.
 - **Contract**: one section per category in the profile's `## Contract` that changes; leave out
   the rest. Describe *what* and *why*; file lists and designs are the developer's.
 - **Acceptance criteria**: observable scenarios, each naming its bit and how it is checked: a
@@ -55,10 +56,11 @@ the implementation goes a bit at a time.
   `(verified by the user)`. A criterion measures the same quantity as the contract rule it
   checks; one built on measured numbers names what is measured and from which source (the one
   the app itself uses), cross-checked by a second, independent measurement. A criterion about
-  timing names the event it is measured after. Each criterion has a case in the data the gate
-  runs against, and each answer-key entry the contract adds (a fixture, a hand-made reading)
-  names the output where it shows. Settle edge cases, empty and error states and what happens
-  to existing data or output in the draft where you can.
+  timing names the event it is measured after. A rule that compares, matches or evens out
+  says what counts as the same and what it is compared against. Each criterion has a case in
+  the data the gate runs against, and each answer-key entry the contract adds (a fixture, a
+  hand-made reading) names the output where it shows. Settle edge cases, empty and error
+  states and what happens to existing data or output in the draft where you can.
 - **Verify**: `yes` when a criterion is left for the tester, else `no`, with one line why.
 - **Neighbours**: for each thing the contract changes, its neighbours per the profile's
   `## Neighbourhood`, *changes* or *stays*, one line why.
@@ -68,9 +70,10 @@ the implementation goes a bit at a time.
   it, all in one list with dependent ones under their parent ("if Q1 = a") (`grilling.md`).
   When the user decides by looking at the output, give each option as a variant they can open
   in the running app (profile `## Running the app`), a full URL per option and place, with
-  counts; for a rule over a group, show the extreme member and the most common one. Name each
-  locked test an option would break, with the lines it touches. Name each temporary file you
-  add and how it is removed.
+  counts; for a rule over a group, show the extreme member and the most common one. Name
+  what each option would change in what committed tests require (a test or assertion
+  removed, an expected value changed), with the lines it touches. Name each temporary file
+  you add and how it is removed.
 - **ADRs touched**, and what the draft leaves out of each (each gap is an open question).
 
 Before you answer, turn each of your Unsure lines (a setting, a scale, a place you could not

@@ -42,6 +42,8 @@ New packages or tools, and why.
 
 `.flow/check <base> [--all-tests] [--no-tests]` from the repo root. Checks: <list>.
 
+<Optional: Before each commit, `<command>` runs and its output is shown with the diff.>
+
 ## Running the app
 
 <Where it is documented, the health check, how to stop it. Or: None, the gate's tests are

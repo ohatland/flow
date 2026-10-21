@@ -19,8 +19,8 @@ read by the user before it is committed (`state.md`, "Bits"). It says *what*, ne
 
 1. **Check place.** The current directory must be the goal's Worktree and on its Branch;
    if not, tell the user and stop. `git status --short` must be clean, or the user decides
-   what to do with the changes. If this session already took a step to `Done`, write the
-   handoff (`flow:handoff`) and ask the user to `/clear` and `/flow:resume` first.
+   what to do with the changes. If this session already took a step to `Done`, ask the user
+   to run `/flow:handoff`, `/clear` and `/flow:resume` first.
 2. **Read** `goal.md`, `candidates.md` (the parts for the area), the previous steps' Task
    and Retro (`sections.sh <step folder>/step.md Task Retro`), and
    `git log --oneline <goal base>..HEAD`. If the retro is due (`orchestrating.md`, "Finishing
@@ -36,14 +36,15 @@ read by the user before it is committed (`state.md`, "Bits"). It says *what*, ne
    change. Do not ask about internal code structure. Questions the user decides by looking at
    the output come with the architect's evidence per option. Get explicit approval of the
    contract, the acceptance criteria and the bits: show the bits one line each (what,
-   criteria, `User looks`) and `Verify:` with its reason. Show the proposed test seams in one
-   line each; they are accepted unless the user objects. More than eight bits means two
-   steps.
+   criteria, `User looks`) and `Verify:` with its reason and the `Estimate:` on one line.
+   Show the proposed test seams in one line each; they are accepted unless the user objects.
+   More than eight bits, or an implement context above about 200k, means two steps.
 6. **Write** `<state>/goals/<goal>/steps/<NN>-<slug>/step.md` from the template in `state.md`
-   (numbering from `01`), Status `Planned`, the approved `Verify:` and `## Bits`, Base commit
-   = current `HEAD`, with today's approval date, the Neighbours, the Test seams and the
-   architect's ID under `## Agents`; questions about this step and changes to its plan go to
-   that architect. Record the answered questions under `## Clarifications`, a line per
-   decision in `decisions.md`, and remove from `candidates.md` what the step does.
+   (numbering from `01`), Status `Planned`, the approved `Verify:` and `## Bits`, the
+   architect's `Estimate:`, Base commit = current `HEAD`, with today's approval date, the
+   Neighbours, the Test seams and the architect's ID under `## Agents`; questions about this
+   step and changes to its plan go to that architect. Record the answered questions under
+   `## Clarifications`, a line per decision in `decisions.md`, and remove from
+   `candidates.md` what the step does.
 7. **Next.** Call the Skill tool with `flow:implement` unless the user wants to stop here
    (for example to hand off to a fresh session first).

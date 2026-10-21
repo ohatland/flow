@@ -50,7 +50,7 @@ agents' to decide.
 
 Actions that need the user's go-ahead in this repo beyond `protocol.md`: expensive,
 irreversible or shared things (a long build, a migration against a shared database,
-downloads, publishing, changing approved tests).
+downloads, publishing, changing what a committed test requires).
 
 ### `## Knowledge`
 
@@ -71,7 +71,8 @@ The command, its options and what it checks. Contract: run from the repo root as
 `===== <name> =====` section per check and ends with a `SUMMARY` block of
 `PASS|FAIL|FLAG  <text>` lines; exit 0, 1 on any FAIL, 2 on usage errors. FAIL blocks the
 step; FLAG is fixed or explained. An optional line `direction: BETTER|NEUTRAL|WORSE|MIXED`
-is recorded in the goal's progress.
+is recorded in the goal's progress. Optionally, a command run before each commit, whose
+output the orchestrator shows with the diff (for example warnings about changed tests).
 
 ### `## Running the app`
 

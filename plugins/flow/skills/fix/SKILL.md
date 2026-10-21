@@ -12,7 +12,8 @@ category: tooling, test hygiene, a cleanup, a helper. Its record has `## Change`
 why, with the candidate step or observation it comes from) in place of `## Problem` and
 `## Expected`, and the developer skips the reproduction loop. New behavior, or a change in
 a contract category beyond restoring the intended behavior, is a contract change: propose
-a goal or step instead. Locked tests stay locked for both (step 2).
+a goal or step instead. For both, changing what a committed test requires is the user's
+decision (step 2); refactoring tests is allowed.
 
 Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` for dispatch, questions and commits
 (read it, `state.md` and `.flow/project.md` if you have not). The record is a fix file
@@ -26,8 +27,9 @@ instead of a step file.
    decided). When the problem is a wrong text or value, search the whole repo for it first
    and list every hit in Problem. Number questions in a fix F1, F2, ... so they never
    collide with a goal's Q numbers. Confirm Expected with the user if it is not written
-   down. List every locked
-   file the fix touches or makes obsolete, and get approval for all of them in one question.
+   down. List every change the fix makes to what committed tests require (a test or
+   assertion removed, an expected value changed), and get approval for all of them in one
+   question.
 3. **Fix.** Dispatch `flow:developer` (record its ID under `## Agents`) with the fix file, the gate command line and the
    shared folder path. It follows its "Bug fixes and chores" section: for a fix, a red loop with a recorded
    command and output, minimised, 3-5 ranked hypotheses, then the fix with the regression

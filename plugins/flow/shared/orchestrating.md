@@ -24,10 +24,9 @@ This is what makes the workflow scale; the role agents carry the heavy context, 
   agent's phase file. Spot checks are fine; reviewing is the reviewers' job.
 - Save long command output (the gate, test runs) to a file under the session scratchpad
   or `$TMPDIR` and read only the summary or failures.
-- One step per session: when a step is `Done`, write the handoff yourself (Skill tool,
-  `flow:handoff`) and ask the user to run `/clear` and then `/flow:resume` before the next
-  step. Within a step, suggest the same when the conversation has grown long; the bits and
-  phases continue from the step files.
+- One step per session: when a step is `Done`, ask the user to run `/flow:handoff`, then
+  `/clear` and `/flow:resume`, before the next step. Within a step, suggest the same when
+  the conversation has grown long; the bits and phases continue from the step files.
 
 ## Trace every agent
 
@@ -63,10 +62,9 @@ step as a whole and your part in it.
 
 Start the agent with: its task in one or two sentences, the step folder, the goal folder,
 the base commit, the gate command line (with any step-specific options the profile's
-`## Gate` describes, including one approval option for each locked file the contract
-approves), which open items to fix first, the absolute path of this shared folder
-(`${CLAUDE_PLUGIN_ROOT}/shared`, expanded), and research note paths if any. Tell reviewers
-to ignore changes outside the step's scope.
+`## Gate` describes), which open items to fix first, the absolute path of this shared
+folder (`${CLAUDE_PLUGIN_ROOT}/shared`, expanded), and research note paths if any. Tell
+reviewers to ignore changes outside the step's scope.
 
 - **Wait** for phase agents and reviewers before you act on their results; launch a round's
   reviewers together in one message and aggregate their reports as they return.
@@ -121,7 +119,7 @@ When an agent returns `QUESTIONS` or `BLOCKED`:
   including the agent's recommendation. Do not soften or filter a question the agent
   considered important. For `BLOCKED`, tell the user exactly what to do.
 - Record each question and answer in the step's `## Clarifications`: the user's literal
-  words in «…», then one line on what they settle, so tests can quote the answer as given. An approved contract
+  words in «…», then one line on what they settle. An approved contract
   change is written into `## Contract` and the acceptance criteria as the new current text,
   with one dated line per change in a short history under the contract; the criteria always
   read as the contract in force.
@@ -147,7 +145,9 @@ and show the user:
 - the full diff saved to a file under the session scratchpad, as a full path on its own line
   (the user may also read it in their editor; show it in the chat when they ask);
 - the `spec` bit check's result, and for a bit with `User looks: yes` the before and after
-  URLs, one per line.
+  URLs, one per line;
+- the output of the command the profile's `## Gate` names for before each commit, when it
+  names one.
 
 Then wait. "ok" (or "ja", "commit") approves this commit. A comment goes back to the agent that
 made the change (same agent, `SendMessage`), and the new diff is shown again. A comment that

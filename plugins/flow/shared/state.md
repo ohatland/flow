@@ -107,6 +107,7 @@ and trace line from `/goal` and `/close-goal`) and `## Retrospective` (written b
 - Goal: [<goal title>](../../goal.md)
 - Status: Planned
 - Verify: <yes | no> - <one line why>
+- Estimate: <bits> bits, implement context about <N>k
 - Base commit: <hash of HEAD when the contract was approved>
 
 ## Task

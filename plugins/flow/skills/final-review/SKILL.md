@@ -51,9 +51,9 @@ Follow `${CLAUDE_PLUGIN_ROOT}/shared/orchestrating.md` (read it, `state.md` next
      "Finishing a phase"; this step counts), call the Skill tool with `flow:retro` for the
      `Done` steps with an empty `## Retro`. Otherwise add one dated line per open friction item from the hotwashes
      (yours and the agents' Improve lines that name the process) to
-     `<state>/goals/process-log.md`. Then stop the app if you started it, write the handoff
-     (Skill tool, `flow:handoff`), and ask the user to run `/clear` and `/flow:resume`
-     before `/flow:next-step` (or `/flow:close-goal` if the success criteria look met).
+     `<state>/goals/process-log.md`. Then stop the app if you started it and ask the user
+     to run `/flow:handoff`, `/clear` and `/flow:resume` before `/flow:next-step` (or
+     `/flow:close-goal` if the success criteria look met).
    - Findings routed to `user`: put them to the user in the grilling format first.
    - Otherwise add a bit `R<round>` under `## Bits` for the findings routed to `implement`
      (they are its open items), set the status to `Implementing` if there is one, else
